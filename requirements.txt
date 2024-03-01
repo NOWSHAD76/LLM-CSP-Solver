@@ -1,0 +1,5 @@
+openai == 1.12.0
+chromadb == 0.4.24
+docplex == 2.25.236
+python-dotenv == 1.0.1
+chainlit == 1.0.300
