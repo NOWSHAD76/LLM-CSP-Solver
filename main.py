@@ -26,7 +26,7 @@ async def coder(problem: str, instructions: str) -> str:
     return code
 
 
-async def input_taker(problem: str, code: str) -> str:
+async def executor_taker(problem: str, code: str) -> str:
     executor_agent = Executor_Agent()
     executor_agent_prompt = f"""
     {problem}\n
@@ -53,9 +53,9 @@ async def code_step(problem: str, instructions: str):
 
 
 @cl.step(type="executor")
-async def input_step(problem: str, code: str):
+async def execute_step(problem: str, code: str):
     # Simulate a running task
-    input_format = await input_taker(problem, code)
+    input_format = await executor_taker(problem, code)
 
     return input_format
 
@@ -70,10 +70,18 @@ async def main(message: cl.Message):
     if not execute_code:
         problem = message.content
         instructions = await plan_step(message.content)
-        code = await code_step(message.content, instructions)
-        working_code = code
-        input_format = await input_step(message.content, code)
-        chainlit_message = input_format
+        if 'Stop_Code:#45019238' in instructions:
+            chainlit_message = instructions
+        elif 'Stop_Code:#41823142' in instructions: #Stop code to prevent things like 
+            chainlit_message = """Apologies, I am unable to accept such an input.\nBelow is a sample of an input I can accept\n\nYou have 3 tasks (A, B, C) to be completed by 2 resources (X, Y) within 3 time slots.\nEach task requires a certain amount of time on each resource, and each resource can work on only one task at a time.\n\nPlease provide your input with such a format."""
+        else:
+            code = await code_step(message.content, instructions)
+            if 'Stop_Code:#45019238' in code:
+                chainlit_message = "Code is unable to be generated, please try again or rephrase your question."
+            else:
+                working_code = code
+                input_format = await execute_step(message.content, code)
+                chainlit_message = input_format
 
         #     problem = """
         #     In the SMU Professor Timetabling problem, we are given a list of courses to be offered, a list of possible time slots, a list of rooms, and a list of professors to teach those courses. Each course needs to be assigned to one professor, in a room, at a timeslot.
