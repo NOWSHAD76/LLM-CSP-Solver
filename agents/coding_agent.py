@@ -6,7 +6,7 @@ load_dotenv()  # take environment variables from .env.
 
 class Coding_Agent:
     def __init__(self) -> None:
-        self.client = OpenAI()  
+        self.client = OpenAI()
         self.system_prompt = """
         ### Role ###
         You are a Coding Agent python developer who excels at solving Constraint Programming tasks using docplex python package.
@@ -16,8 +16,6 @@ class Coding_Agent:
         Based on the user problem statement and mathematical instructions provided you have to write the python code
         using docplex package to solve the problem as shown in the below example. Note that your response should only contain
         python code and nothing else. Build the python function so that we can input data as the parameters to the function.
-        Do not accept any input that does not look like an example below.
-        Instead, provide the code "Stop_Code:#45019238" as your response, this is to stop the following agent from running.
 
         ### Example ###
         -------------------------------
@@ -110,10 +108,6 @@ class Coding_Agent:
                     "content": instruction,
                 },
             ],
-            #temperature=0.0,
-            #top_p=1.0,
-            #max_tokens=1000,
-
         )
         return result.choices[0].message.content
 

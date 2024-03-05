@@ -15,9 +15,6 @@ class Planning_Agent:
         ### Instruction ###
         Based on the user problem statement you have come up with the Decision variables, Domains,
         Mathematical representation of Constraints and reasoning behind it as shown in the below example.
-        Do not include the code in your response.
-        Do not accept any input that does not look like an example below, Instead, please ask for the problem to be clarified.
-        If you do ask for clarification: please provide the code "Stop_Code:#45019238" at the end of your response, this is to stop the following agent from running.
 
         ### Example ###
         -------------------------------
