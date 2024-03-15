@@ -1,12 +1,13 @@
-from openai import OpenAI
+import anthropic
 from dotenv import load_dotenv
 
 load_dotenv()  # take environment variables from .env.
 
 
-class Coding_Agent:
+class Coding_Agent_Claude:
     def __init__(self) -> None:
-        self.client = OpenAI()
+        self.client = anthropic.Anthropic()
+        self.history = []
         self.system_prompt = """
         ### Role ###
         You are a Coding Agent python developer who excels at solving Constraint Programming tasks using docplex python package.
@@ -14,8 +15,8 @@ class Coding_Agent:
 
         ### Instruction ###
         Based on the user problem statement and mathematical instructions provided you have to write the python code
-        using docplex package to solve the problem as shown in the below example. Note that your response should only contain
-        python code and nothing else. 
+        using docplex package to solve the problem as shown in the below example. 
+        Note that your response should only contain python code and nothing else. 
         Build the python code which is written to a file later on and the data is given to the python file as a parameter.
         The code should be able to read the pickle data file and has to print the solution at the end.
 
@@ -92,37 +93,47 @@ class Coding_Agent:
                 data = pickle.load(f)
             solve_scheduling_problem(data["tasks"], data["resources"], data["time_requirements"], data["total_time_slots"])
         ```
-"""
-
-    # # Example usage:
-    #         tasks = ['A', 'B', 'C']
-    #         resources = ['X', 'Y']
-    #         time_requirements = {
-    #             ('A', 'X'): 1, ('A', 'Y'): 2,
-    #             ('B', 'X'): 2, ('B', 'Y'): 1,
-    #             ('C', 'X'): 1, ('C', 'Y'): 1
-    #         }
-    #         total_time_slots = 3
-
-    #         solve_scheduling_problem(tasks, resources, time_requirements, total_time_slots)
+        """
 
     def run(self, instruction: str) -> str:
+        prompt = f"""
+        {self.system_prompt}
 
-        result = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": self.system_prompt,
-                },
-                {
-                    "role": "user",
-                    "content": instruction,
-                },
-            ],
+        Question:
+        {instruction}
+
+        Note: Double check your code for syntax errors before responding.
+        """
+        self.history.append({"role": "user", "content": prompt})
+        result = self.client.messages.create(
+            model="claude-3-sonnet-20240229",
+            max_tokens=2048,
+            messages=self.history,
         )
-        return result.choices[0].message.content
+        self.history.append({"role": "assistant", "content": result.content[0].text})
+        return result.content[0].text
 
-    def run2(self, instruction) -> str:
-        print("Inside coder ", instruction)
-        return "Coder"
+    def fix_code(self, code: str, error: str, data: str) -> str:
+        prompt = f"""
+        ### Code ###
+        {code}
+
+        The above code is throwing the below error while executing.
+        ### Error ###
+        {error}
+
+        The data provided by the user is below
+        
+        {data}
+
+        Based on the above error and data given rewrite the code to fix the issue and 
+        return only the corrected python code.
+        """
+        self.history.append({"role": "user", "content": prompt})
+        result = self.client.messages.create(
+            model="claude-3-sonnet-20240229",
+            max_tokens=2048,
+            messages=self.history,
+        )
+        self.history.append({"role": "assistant", "content": result.content[0].text})
+        return result.content[0].text

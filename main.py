@@ -1,5 +1,6 @@
 from agents.planning_agent import Planning_Agent
 from agents.coding_agent import Coding_Agent
+from agents.coding_agent_claude import Coding_Agent_Claude
 from agents.executor_agent import Executor_Agent
 import chainlit as cl
 
@@ -8,6 +9,10 @@ problem = None
 working_code = None
 input_data = None
 chainlit_message = None
+code_retry_count = 1
+executor_agent = Executor_Agent()
+# coding_agent = Coding_Agent()
+coding_agent = Coding_Agent_Claude()
 
 
 async def planner(problem: str) -> str:
@@ -17,7 +22,7 @@ async def planner(problem: str) -> str:
 
 
 async def coder(problem: str, instructions: str) -> str:
-    coding_agent = Coding_Agent()
+    global coding_agent
     coding_agent_prompt = f"""
     {problem}\n
     {instructions}
@@ -26,14 +31,30 @@ async def coder(problem: str, instructions: str) -> str:
     return code
 
 
-async def input_taker(problem: str, code: str) -> str:
-    executor_agent = Executor_Agent()
+async def input_taker(problem: str, code: str):
+    global executor_agent
     executor_agent_prompt = f"""
     {problem}\n
     {code}
     """
     input_format = executor_agent.input_format(executor_agent_prompt)
     return input_format
+
+
+@cl.step(type="code execution")
+async def code_executor(code: str, data_path: str):
+    global executor_agent
+    return_code, logs = executor_agent.execute_code(code, data_path)
+    return return_code, logs
+
+
+@cl.step(type="code fixing")
+async def code_fixing(code: str, error: str, data: str):
+    global coding_agent
+    global working_code
+    code_fix = coding_agent.fix_code(code, error, data)
+    working_code = code_fix
+    return code_fix
 
 
 @cl.step(type="planner")
@@ -67,6 +88,8 @@ async def main(message: cl.Message):
     global problem
     global working_code
     global chainlit_message
+    global executor_agent
+    global code_retry_count
     if not execute_code:
         problem = message.content
         instructions = await plan_step(message.content)
@@ -75,8 +98,8 @@ async def main(message: cl.Message):
         input_format = await input_step(message.content, code)
         chainlit_message = input_format
 
-        #     problem = """
-        #     In the SMU Professor Timetabling problem, we are given a list of courses to be offered, a list of possible time slots, a list of rooms, and a list of professors to teach those courses. Each course needs to be assigned to one professor, in a room, at a timeslot.
+        # problem = """
+        # In the SMU Professor Timetabling problem, we are given a list of courses to be offered, a list of possible time slots, a list of rooms, and a list of professors to teach those courses. Each course needs to be assigned to one professor, in a room, at a timeslot.
 
         # For simplicity, assume that every course meets once a week at one of the 15 time slots (that is, Mon to Fri 8:30-11:45am, 12:00-3:15pm, and 3:30-6:45pm), and all rooms are identical.
 
@@ -92,15 +115,36 @@ async def main(message: cl.Message):
         # •	T (i.e. T[x] denotes the time slot assigned to course x, for each course x)
         # •	R (i.e. R[x] denotes the room assigned to course x, for each course x)
         # •	P (i.e. P[x] denotes the professor assigned to course x, for each course x)
-        #     """
-        #     input_format = await input_step(problem, message.content)
+        # """
+        # input_format = await input_step(problem, message.content)
+        # chainlit_message = input_format
         execute_code = True
+
     else:
         ## Actual code execution
-        input_data = message.content
+        # input_data = message.content
+        # file = message.file
         # call some method with code and input_data as params [TO DO]
         # print("Inside execute code ", input_data)
-        chainlit_message = "Docplex code execution is still work in progress!!!!"
+        # run_command = executor_agent.get_run_command()
+        # print("Run command ", run_command)
+        # res = executor_agent.execute_code(working_code, input_data, run_command)
+        files = None
+        # Wait for the user to upload a file
+        while files == None:
+            files = await cl.AskFileMessage(
+                content="Please upload the pickle file to run the code!",
+                accept=["pk"],
+            ).send()
+        pickle_file = files[0]
+        return_code, logs = await code_executor(working_code, pickle_file.path)
+        if return_code != 0:
+            input_data = executor_agent.read_data(pickle_file.path)
+        while return_code != 0 and code_retry_count <= 3:
+            code_fix = await code_fixing(working_code, logs, input_data)
+            return_code, logs = await code_executor(code_fix, pickle_file.path)
+            code_retry_count += 1
+        chainlit_message = logs
 
     # Send the final answer.
     await cl.Message(content=chainlit_message).send()
