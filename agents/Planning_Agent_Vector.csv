@@ -1,0 +1,119 @@
+﻿problem_id,problem_type
+Classroom_assign,"*User:*
+Problem Statement:
+ A university department needs to assign three courses (C1, C2, C3) to three classrooms (R1, R2, R3). Each course has a different number of students (C1: 25 students, C2: 50 students, C3: 75 students), and each classroom has a different seating capacity (R1: 50 seats, R2: 75 seats, R3: 100 seats). Assign the courses to the classrooms such that no classroom is underutilized, and the largest classes are given priority for the larger rooms.
+
+*Constraints:*
+
+A classroom can be assigned to only one course.
+The number of students in a course cannot exceed the seating capacity of its assigned classroom.
+
+*Solution:*
+
+C3 (75 students) should be assigned to R3 (100 seats) to accommodate all students while prioritizing the largest class.
+C2 (50 students) should be assigned to R1 (50 seats) as it perfectly fits the class size.
+C1 (25 students) should be assigned to R2 (75 seats), even though it's underutilized, it's the only remaining option."
+Travelling_salesman,"*User:*
+Problem Statement:
+ A salesperson must visit four cities (A, B, C, D) and return to the starting city. The distance between each city is as follows: AB: 10, AC: 15, AD: 20, BC: 25, BD: 30, CD: 35. Find the shortest route that visits each city exactly once and returns to the starting city.
+
+*Constraints:*
+
+Each city must be visited exactly once.
+The route must start and end at the same city.
+
+*Solution:*
+
+The Shortest Route is A → B → C → D → A with a total distance of 10 (AB) + 25 (BC) + 35 (CD) + 20 (DA) = 90 units."
+Project_Management_Resource_Allocation,"*User:*
+Problem Statement: A project manager has to allocate three projects (P1, P2, P3) to four team members (T1, T2, T3, T4) based on their skill levels. The requirements (on a scale of 1 to 10) and the skills of each member are as follows:
+
+Projects: P1 requires a skill level of 7, P2 requires 5, and P3 requires 8.
+Team Members: T1 has a skill level of 8, T2 has 6, T3 has 7, and T4 has 9.
+Each team member can take on only one project. Assign the projects to maximize the overall skill match.
+
+*Constraints:*
+
+Each project is assigned to exactly one team member.
+A team member's skill level must meet or exceed the project's requirement.
+
+*Solution:*
+
+P1 (skill 7) is assigned to T3 (skill 7).
+P2 (skill 5) is assigned to T2 (skill 6).
+P3 (skill 8) is assigned to T4 (skill 9).
+This allocation ensures that all projects are matched to team members who meet or exceed the project skill requirements, optimizing the skill match."
+Diet_Planning,"*User:*
+Problem Statement: 
+A nutritionist is planning a diet that must include at least 50g of protein, 20g of fat, and 30g of carbohydrates. The diet can include any combination of three foods (F1, F2, F3), with the following nutritional content per serving:
+
+F1: 10g protein, 10g fat, 0g carbohydrates
+F2: 0g protein, 5g fat, 15g carbohydrates
+F3: 20g protein, 5g fat, 15g carbohydrates
+Minimize the number of servings to meet the nutritional requirements.
+
+*Constraints:*
+
+The diet must meet or exceed the minimum requirements for protein, fat, and carbohydrates.
+The number of servings for each food should be minimized.
+
+*Solution:*
+
+2 servings of F3 will provide 40g protein, 10g fat, and 30g carbohydrates.
+1 serving of F1 will provide the additional 10g protein and 10g fat needed.
+So, the solution is 2 servings of F3 and 1 serving of F1 to meet the nutritional requirements with the minimum number of servings"
+Bin_Packing,"*User:*
+Problem Statement: 
+An e-commerce company needs to ship orders in the fewest boxes possible. There are 4 orders with sizes 2, 5, 4, and 7 units, respectively, and each box can hold up to 10 units.
+
+*Constraints:*
+
+The total size of orders in a box cannot exceed the box's capacity.
+Minimize the number of boxes used.
+
+*Solution:*
+
+Box 1: Orders 2 and 7 (9 units total)
+Box 2: Orders 5 and 4 (9 units total)
+This solution uses 2 boxes, minimizing the number of boxes while respecting the capacity constraint."
+Water_Jug_Problem,"*User:*
+Problem Statement: 
+You have two jugs with capacities of 3 liters and 5 liters and an unlimited water supply. Measure exactly 4 liters of water using these two jugs.
+
+*Constraints:*
+
+You can fill a jug, empty a jug, or pour water from one jug to another until either the source jug is empty or the target jug is full.
+
+*Solution:*
+
+Fill the 3-liter jug and pour its contents into the 5-liter jug.
+Fill the 3-liter jug again and pour it into the 5-liter jug until the 5-liter jug is full. This leaves exactly 1 liter in the 3-liter jug.
+Empty the 5-liter jug and pour the 1 liter from the 3-liter jug into the 5-liter jug.
+Fill the 3-liter jug one more time and pour it into the 5-liter jug, giving a total of 4 liters in the 5-liter jug."
+Hospital_Ward_Assignment,"*User:*
+Problem Statement: A hospital needs to assign patients to wards based on their medical needs. There are 3 patients (P1 with orthopedic needs, P2 with cardiac issues, P3 needing general care) and 2 wards (W1 is a cardiac ward, W2 is a general ward). Each ward can accommodate up to 2 patients. Assign patients to wards to ensure their medical needs are met.
+
+*Constraints:*
+
+Patients must be placed in wards that can cater to their specific medical needs.(e.g. a cardiac patient requires a cardiac ward)
+Each ward has a capacity limit.
+
+*Solution:*
+
+W1 (Cardiac Ward): P2
+W2 (General Ward): P1, P3
+This ensures that all patients are placed in appropriate wards for their medical conditions, within capacity constraints."
+Library_Book_Allocation,"*User:*
+Problem Statement: A library has to allocate newly acquired books to its branches to maximize accessibility. There are 3 branches (B1, B2, B3) and 4 books (BK1, BK2, BK3, BK4). Each branch has requested books based on reader interest as follows: B1 requests BK1, BK2; B2 requests BK2, BK3; B3 requests BK3, BK4. Each book can only be allocated to one branch.
+
+*Constraints:*
+
+Each book can be allocated to only one branch.
+Aim to meet as many requests as possible.
+
+*Solution:*
+
+BK1 → B1 (Unique request)
+BK2 → B1 or B2 (Choose B1 for argument's sake)
+BK3 → B2 (Since BK2 went to B1)
+BK4 → B3 (Unique request)"

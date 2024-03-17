@@ -67,6 +67,7 @@ async def main(message: cl.Message):
     global problem
     global working_code
     global chainlit_message
+    execute_code = False
     if not execute_code:
         problem = message.content
         instructions = await plan_step(message.content)
