@@ -34,7 +34,7 @@ class Coding_Agent:
 
         Constraints:
         1) Task Assignment Constraint: Each task should be assigned to exactly one resource.
-        ∑_(j=1) ( T_ij = 1 ), for each task i
+        ∑_(j=1) ( T_ij = 1 ), for each task i   
         2) Resource Availability Constraint: At any time slot, a resource can handle only one task.
         ∑_(i=1) ( T_ij <= 1 ), for each resource j
         3) Time Slot Constraint: Each task should be completed within the given time frame (3 time slots).
@@ -110,8 +110,8 @@ class Coding_Agent:
                     "content": instruction,
                 },
             ],
-            #temperature=0.0,
-            #top_p=1.0,
+            temperature=0.2,
+            top_p=0.9,
             #max_tokens=1000,
 
         )

@@ -16,6 +16,8 @@ class Executor_Agent:
         Based on the given problem and code you have to generate the arguments that are passed to the python 
         function and give appropriate example to explain the format of the input along with the explantion of the parameter.
         Use the below example as a reference.
+        ALWAYS explain to the user what they are supposed to provide, using the example below.
+        ALWAYS Remind the User that they are supposed to provide a Json File or Structured Data.
 
         ### Example ###
         -------------------------------
@@ -62,7 +64,8 @@ class Executor_Agent:
                 print("No solution found")
 
         *Executor Agent:*
-
+        Please read the bottom to prepare your files.
+        
         tasks = List of tasks that needs to be scheduled
         resources = List of resources that are available
         time_requirements = Dictionary of the time requirements to finish a task by using a resource
@@ -94,5 +97,7 @@ class Executor_Agent:
                     "content": code,
                 },
             ],
+            temperature= 0.3,
+            top_p= 0.9
         )
         return result.choices[0].message.content

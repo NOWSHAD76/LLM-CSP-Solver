@@ -1,0 +1,78 @@
+﻿problem_id,problem_type
+Classroom_assign,"*User:*
+Problem Statement:
+ A university department needs to assign three courses (C1, C2, C3) to three classrooms (R1, R2, R3). Each course has a different number of students (C1: 25 students, C2: 50 students, C3: 75 students), and each classroom has a different seating capacity (R1: 50 seats, R2: 75 seats, R3: 100 seats). Assign the courses to the classrooms such that no classroom is underutilized, and the largest classes are given priority for the larger rooms.
+
+*Constraints:*
+
+A classroom can be assigned to only one course.
+The number of students in a course cannot exceed the seating capacity of its assigned classroom.
+
+*Solution:*
+
+C3 (75 students) should be assigned to R3 (100 seats) to accommodate all students while prioritizing the largest class.
+C2 (50 students) should be assigned to R1 (50 seats) as it perfectly fits the class size.
+C1 (25 students) should be assigned to R2 (75 seats), even though it's underutilized, it's the only remaining option."
+Travelling_salesman,"*User:*
+Problem Statement:
+ A salesperson must visit four cities (A, B, C, D) and return to the starting city. The distance between each city is as follows: AB: 10, AC: 15, AD: 20, BC: 25, BD: 30, CD: 35. Find the shortest route that visits each city exactly once and returns to the starting city.
+
+*Constraints:*
+
+Each city must be visited exactly once.
+The route must start and end at the same city.
+
+*Solution:*
+
+One possible route is A → B → C → D → A with a total distance of 10 (AB) + 25 (BC) + 35 (CD) + 20 (DA) = 90 units."
+Resource_Allocation,"*User:*
+Problem Statement: A project manager has to allocate three projects (P1, P2, P3) to four team members (T1, T2, T3, T4) based on their skill levels. The requirements (on a scale of 1 to 10) and the skills of each member are as follows:
+
+Projects: P1 requires a skill level of 7, P2 requires 5, and P3 requires 8.
+Team Members: T1 has a skill level of 8, T2 has 6, T3 has 7, and T4 has 9.
+Each team member can take on only one project. Assign the projects to maximize the overall skill match.
+
+*Constraints:*
+
+Each project is assigned to exactly one team member.
+A team member's skill level must meet or exceed the project's requirement.
+
+*Solution:*
+
+P1 (skill 7) is assigned to T3 (skill 7).
+P2 (skill 5) is assigned to T2 (skill 6).
+P3 (skill 8) is assigned to T4 (skill 9).
+This allocation ensures that all projects are matched to team members who meet or exceed the project skill requirements, optimizing the skill match."
+Diet_Planning,"*User:*
+Problem Statement: 
+A nutritionist is planning a diet that must include at least 50g of protein, 20g of fat, and 30g of carbohydrates. The diet can include any combination of three foods (F1, F2, F3), with the following nutritional content per serving:
+
+F1: 10g protein, 10g fat, 0g carbohydrates
+F2: 0g protein, 5g fat, 15g carbohydrates
+F3: 20g protein, 5g fat, 15g carbohydrates
+Minimize the number of servings to meet the nutritional requirements.
+
+*Constraints:*
+
+The diet must meet or exceed the minimum requirements for protein, fat, and carbohydrates.
+The number of servings for each food should be minimized.
+
+*Solution:*
+
+2 servings of F3 will provide 40g protein, 10g fat, and 30g carbohydrates.
+1 serving of F1 will provide the additional 10g protein and 10g fat needed.
+So, the solution is 2 servings of F3 and 1 serving of F1 to meet the nutritional requirements with the minimum number of servings"
+Bin_Packing,"*User:*
+Problem Statement: 
+An e-commerce company needs to ship orders in the fewest boxes possible. There are 4 orders with sizes 2, 5, 4, and 7 units, respectively, and each box can hold up to 10 units.
+
+*Constraints:*
+
+The total size of orders in a box cannot exceed the box's capacity.
+Minimize the number of boxes used.
+
+*Solution:*
+
+Box 1: Orders 2 and 7 (9 units total)
+Box 2: Orders 5 and 4 (9 units total)
+This solution uses 2 boxes, minimizing the number of boxes while respecting the capacity constraint."

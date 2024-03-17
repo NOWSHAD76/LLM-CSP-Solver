@@ -1,5 +1,182 @@
-openai == 1.12.0
-chromadb == 0.4.24
-docplex == 2.25.236
-python-dotenv == 1.0.1
-chainlit == 1.0.300
+absl-py==2.1.0
+aiofiles==23.2.1
+aiohttp==3.9.3
+aiosignal==1.3.1
+annotated-types==0.6.0
+anyio==4.3.0
+asgiref==3.7.2
+asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
+astunparse==1.6.3
+async-timeout==4.0.3
+asyncer==0.0.2
+attrs==23.2.0
+backoff==2.2.1
+bcrypt==4.1.2
+bidict==0.23.1
+build==1.1.1
+cachetools==5.3.3
+certifi==2024.2.2
+chainlit==1.0.300
+charset-normalizer==3.3.2
+chroma-hnswlib==0.7.3
+chromadb==0.4.14
+click==8.1.7
+colorama==0.4.6
+coloredlogs==15.0.1
+comm @ file:///C:/b/abs_67a8058udb/croot/comm_1709322909844/work
+contourpy==1.2.0
+cplex @ file:///C:/Program%20Files/IBM/ILOG/CPLEX_Studio2211/cplex/python/3.10/x64_win64
+cycler==0.12.1
+dataclasses-json==0.5.14
+debugpy @ file:///C:/b/abs_c0y1fjipt2/croot/debugpy_1690906864587/work
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+Deprecated==1.2.14
+distro==1.9.0
+docplex==2.25.236
+exceptiongroup==1.2.0
+executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+fastapi==0.110.0
+fastapi-socketio==0.0.10
+filelock==3.13.1
+filetype==1.2.0
+flatbuffers==24.3.7
+fonttools==4.47.2
+frozenlist==1.4.1
+fsspec==2024.3.0
+gast==0.4.0
+google-auth==2.28.1
+google-auth-oauthlib==0.4.6
+google-pasta==0.2.0
+googleapis-common-protos==1.62.0
+grpcio==1.62.1
+h11==0.14.0
+h5py==3.10.0
+httpcore==1.0.4
+httptools==0.6.1
+httpx==0.27.0
+huggingface-hub==0.21.4
+humanfriendly==10.0
+idna==3.6
+importlib-metadata==6.11.0
+importlib_resources==6.3.1
+ipykernel @ file:///D:/bld/ipykernel_1705418162861/work
+ipython @ file:///C:/b/abs_b6pfgmrqnd/croot/ipython_1704833422163/work
+jedi @ file:///C:/ci/jedi_1644315428305/work
+Jinja2==3.1.2
+joblib==1.3.2
+jupyter_client @ file:///C:/b/abs_a6h3c8hfdq/croot/jupyter_client_1699455939372/work
+jupyter_core @ file:///C:/b/abs_c769pbqg9b/croot/jupyter_core_1698937367513/work
+keras==2.10.0
+Keras-Preprocessing==1.1.2
+kiwisolver==1.4.5
+kubernetes==29.0.0
+Lazify==0.4.0
+libclang==16.0.6
+literalai==0.0.204
+Markdown==3.5.2
+MarkupSafe==2.1.5
+marshmallow==3.21.0
+matplotlib==3.8.2
+matplotlib-inline @ file:///C:/ci/matplotlib-inline_1661934094726/work
+mmh3==4.1.0
+monotonic==1.6
+mpmath==1.3.0
+multidict==6.0.5
+mypy-extensions==1.0.0
+nest-asyncio @ file:///C:/b/abs_65d6lblmoi/croot/nest-asyncio_1708532721305/work
+networkx==3.2.1
+numpy==1.26.4
+oauthlib==3.2.2
+onnxruntime==1.17.1
+openai==1.12.0
+opentelemetry-api==1.23.0
+opentelemetry-exporter-otlp==1.23.0
+opentelemetry-exporter-otlp-proto-common==1.23.0
+opentelemetry-exporter-otlp-proto-grpc==1.23.0
+opentelemetry-exporter-otlp-proto-http==1.23.0
+opentelemetry-instrumentation==0.44b0
+opentelemetry-instrumentation-asgi==0.44b0
+opentelemetry-instrumentation-fastapi==0.44b0
+opentelemetry-proto==1.23.0
+opentelemetry-sdk==1.23.0
+opentelemetry-semantic-conventions==0.44b0
+opentelemetry-util-http==0.44b0
+opt-einsum==3.3.0
+orjson==3.9.15
+overrides==7.7.0
+packaging==24.0
+pandas==2.2.0
+parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
+pillow==10.2.0
+platformdirs @ file:///C:/b/abs_b6z_yqw_ii/croot/platformdirs_1692205479426/work
+posthog==3.5.0
+prompt-toolkit @ file:///C:/b/abs_68uwr58ed1/croot/prompt-toolkit_1704404394082/work
+protobuf==5.26.0
+psutil @ file:///C:/Windows/Temp/abs_b2c2fd7f-9fd5-4756-95ea-8aed74d0039flsd9qufz/croots/recipe/psutil_1656431277748/work
+pulsar-client==3.4.0
+pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
+pyasn1==0.5.1
+pyasn1-modules==0.3.0
+pydantic==2.6.4
+pydantic_core==2.16.3
+Pygments @ file:///C:/b/abs_fay9dpq4n_/croot/pygments_1684279990574/work
+PyJWT==2.8.0
+pyparsing==3.1.1
+PyPika==0.48.9
+pyproject_hooks==1.0.0
+pyreadline3==3.4.1
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+python-engineio==4.9.0
+python-graphql-client==0.4.3
+python-multipart==0.0.6
+python-socketio==5.11.1
+pytz==2023.3.post1
+pywin32==305.1
+PyYAML==6.0.1
+pyzmq @ file:///C:/b/abs_89aq69t0up/croot/pyzmq_1705605705281/work
+requests==2.31.0
+requests-oauthlib==1.3.1
+rsa==4.9
+scikit-learn==1.4.1.post1
+scipy==1.12.0
+seaborn==0.13.2
+simple-websocket==1.0.0
+six==1.16.0
+sniffio==1.3.1
+stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+starlette==0.36.3
+sympy==1.12
+syncer==2.0.3
+tenacity==8.2.3
+tensorboard==2.10.1
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.1
+tensorflow==2.13.1
+tensorflow-estimator==2.10.0
+tensorflow-io-gcs-filesystem==0.31.0
+termcolor==2.4.0
+threadpoolctl==3.3.0
+tokenizers==0.15.2
+tomli==2.0.1
+torchaudio==2.2.1+cu118
+tornado @ file:///C:/b/abs_0cbrstidzg/croot/tornado_1696937003724/work
+tqdm==4.66.2
+traitlets @ file:///C:/b/abs_e5m_xjjl94/croot/traitlets_1671143896266/work
+typer==0.9.0
+typing-inspect==0.9.0
+typing_extensions==4.10.0
+tzdata==2023.4
+uptrace==1.22.0
+urllib3==2.2.1
+uvicorn==0.28.0
+watchfiles==0.21.0
+wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+websocket-client==1.7.0
+websockets==12.0
+Werkzeug==3.0.1
+wrapt==1.16.0
+wsproto==1.2.0
+xgboost==2.0.3
+yarl==1.9.4
+zipp==3.17.0
