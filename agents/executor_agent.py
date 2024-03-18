@@ -29,7 +29,7 @@ class Executor_Agent:
         self.history = []
         self.system_prompt = """
         ### Role ###
-        You are a Executor agent python developer who excels at understanding python code solving mainly 
+        You are a Executor agent python developer who excels at understanding python code and logs analyzing for solving mainly 
         Constraint Programming tasks using docplex python package.
 
         ### Instruction ###
@@ -242,11 +242,44 @@ class Executor_Agent:
                 logs = logs.replace(str(abs_path), "")
         else:
             logs = result.stdout
-        print("Result code====> ", result.returncode)
-        print("Logs===>", logs)
+        # print("Result code====> ", result.returncode)
+        # print("Logs===>", logs)
         return result.returncode, logs
 
     def read_data(self, file_path: str) -> str:
         with open(file_path, "rb") as f:
             data = pickle.load(f)
         return str(data)
+
+    def logs_analyzer(self, logs: str):
+        prompt = f"""
+        Analyze the below error logs and give me the exact error like AttributeError, TypeError etc
+        excluding the line number, file name etc as shown in the below example
+
+        ### Example ###
+        Logs:
+        'Traceback (most recent call last):\n  File "tmp_code_64f7cb4eb273266054c292edab2b00ae.py", line 49, in <module>   
+        solve_sudoku(data)\n  File "tmp_code_64f7cb4eb273266054c292edab2b00ae.py", line 15, in solve_sudoku\n    
+        model.add_constraint(model.all_distinct(X[i, j] for j in range(9)))
+        AttributeError: \'CpoModel\' object has no attribute \'all_distinct\'\n'
+
+        Answer:
+        AttributeError: CpoModel object has no attribute all_distinct
+
+        Your turn:
+        {logs}
+        
+        Answer:
+        """
+        usr_msg = {"role": "user", "content": prompt}
+        self.history.append(usr_msg)
+        result = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=self.history,
+        )
+        message_answer = {
+            "role": "assistant",
+            "content": result.choices[0].message.content,
+        }
+        self.history.append(message_answer)
+        return result.choices[0].message.content

@@ -7,6 +7,7 @@ load_dotenv()  # take environment variables from .env.
 class Coding_Agent:
     def __init__(self) -> None:
         self.client = OpenAI()
+        self.history = []
         self.system_prompt = """
         ### Role ###
         You are a Coding Agent python developer who excels at solving Constraint Programming tasks using docplex python package.
@@ -18,6 +19,7 @@ class Coding_Agent:
         python code and nothing else. 
         Build the python code which is written to a file later on and the data is given to the python file as a parameter.
         The code should be able to read the pickle data file and has to print the solution at the end.
+        Make sure to double check your responses before answering to avoid syntax errors.
 
         ### Example ###
         -------------------------------
@@ -107,22 +109,43 @@ class Coding_Agent:
     #         solve_scheduling_problem(tasks, resources, time_requirements, total_time_slots)
 
     def run(self, instruction: str) -> str:
+        system_msg = {"role": "system", "content": self.system_prompt}
+        user_msg = {"role": "user", "content": instruction}
+        self.history.append(system_msg)
+        self.history.append(user_msg)
 
         result = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "system",
-                    "content": self.system_prompt,
-                },
-                {
-                    "role": "user",
-                    "content": instruction,
-                },
-            ],
+            model="gpt-3.5-turbo", messages=self.history
+        )
+        self.history.append(
+            {"role": "assistant", "content": result.choices[0].message.content}
         )
         return result.choices[0].message.content
 
-    def run2(self, instruction) -> str:
-        print("Inside coder ", instruction)
-        return "Coder"
+    def fix_code(self, code: str, error: str, data: str, docs: str) -> str:
+        prompt = f"""
+        ### Code ###
+        {code}
+
+        The above code is throwing the below error while executing.
+        ### Error ###
+        {error}
+
+        The data provided by the user is below
+        
+        {data}
+
+        Sample documentation for your reference
+        {docs}
+
+        Based on the above error, data given and documentation rewrite the code to fix the issue and 
+        return the entire corrected python code.
+        """
+        self.history.append({"role": "user", "content": prompt})
+        result = self.client.chat.completions.create(
+            model="gpt-3.5-turbo", messages=self.history
+        )
+        self.history.append(
+            {"role": "assistant", "content": result.choices[0].message.content}
+        )
+        return result.choices[0].message.content

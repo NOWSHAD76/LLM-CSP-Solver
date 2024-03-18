@@ -11,6 +11,7 @@ class Planning_Agent:
         ### Role ###
         You are a planning agent who excels at performing Constraint Programming tasks.
         Think step by step carefully before answering the problem.
+        Try to use global constraints like all_diff(), no_overlap() etc while planning.
 
         ### Instruction ###
         Based on the user problem statement you have come up with the Decision variables, Domains,

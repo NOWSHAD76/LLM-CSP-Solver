@@ -15,8 +15,7 @@ class Coding_Agent_Claude:
 
         ### Instruction ###
         Based on the user problem statement and mathematical instructions provided you have to write the python code
-        using docplex package to solve the problem as shown in the below example. 
-        Note that your response should only contain python code and nothing else. 
+        using docplex package to solve the problem as shown in the below example.
         Build the python code which is written to a file later on and the data is given to the python file as a parameter.
         The code should be able to read the pickle data file and has to print the solution at the end.
 
@@ -93,6 +92,10 @@ class Coding_Agent_Claude:
                 data = pickle.load(f)
             solve_scheduling_problem(data["tasks"], data["resources"], data["time_requirements"], data["total_time_slots"])
         ```
+
+        ### Note ###
+        Note that your response should only contain python code without any explanation or run command is needed.
+        You can try to use global constraints like all_diff(), no_overlap() etc
         """
 
     def run(self, instruction: str) -> str:
@@ -113,7 +116,7 @@ class Coding_Agent_Claude:
         self.history.append({"role": "assistant", "content": result.content[0].text})
         return result.content[0].text
 
-    def fix_code(self, code: str, error: str, data: str) -> str:
+    def fix_code(self, code: str, error: str, data: str, docs: str) -> str:
         prompt = f"""
         ### Code ###
         {code}
@@ -126,8 +129,12 @@ class Coding_Agent_Claude:
         
         {data}
 
-        Based on the above error and data given rewrite the code to fix the issue and 
-        return only the corrected python code.
+        Below is the python docplex library documentation which you can use to fix the above error
+        {docs}
+
+        Based on the above error, data provided by the user and documentation,rewrite the code to fix the issue and 
+        return the entire python code.
+        Think step by step carefully before writing the code to avoid the same mistake.
         """
         self.history.append({"role": "user", "content": prompt})
         result = self.client.messages.create(

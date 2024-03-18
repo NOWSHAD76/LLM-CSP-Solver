@@ -1,0 +1,2042 @@
+Arithmetic expressions
+
+The following functions are used to construct arithmetic expressions. When exists, the corresponding operator are also overloaded to make easier the writing of expressions.
+
+plus(): Addition of two expressions.
+minus(): Difference between two expressions, or unary minus of a single one.
+times(): Multiplication of two expressions.
+int_div(): Integer division of two expressions.
+float_div(): Floating point division of two expressions.
+mod(): Modulo of two expressions.
+abs(): Absolute value of an expression.
+square(): Square of an expression.
+power(): Power of an expression by another.
+log(): Logarithm of an expression.
+exponent(): Exponentiation of an expression.
+sum(): Sum of multiple expressions.
+min(): Minimum of multiple expressions.
+max(): Maximum of multiple expressions.
+ceil(): Rounds a float expression upward to the nearest integer.
+floor(): Rounds a float expression down to the nearest integer.
+round(): Rounds a float expression to the nearest integer.
+trunc(): Truncated integer parts of a float expression.
+sgn(): Sign of a float expression.
+
+---------
+Logical expressions
+
+The following functions are used to construct logical expressions. As for arithmetic, the corresponding operators are also overloaded.
+
+logical_and(): Logical AND of two boolean expressions or an array of expressions.
+logical_or(): Logical OR of two boolean expressions or an array of expressions.
+logical_not(): Logical NOT of a boolean expression.
+equal(): Equality between two expressions.
+diff(): Inequality between two expressions.
+greater(): An expression is greater than another.
+greater_or_equal(): An expression is greater or equal to another.
+less(): An expression is less than another.
+less_or_equal(): An expression is less or equal to another.
+true(): Always true boolean expression.
+false(): Always false boolean expression.
+
+---------
+Following functions allow to construct general purpose expressions:
+
+count(): Counts the occurrences of an expression in an array of integer expressions.
+count_different(): Counts the number of different values in an array of integer expressions.
+scal_prod(): Scalar product of two vectors.
+constant(): Creates an expression from a numeric constant.
+element(): Access to an element of an array using an integer expression.
+range(): Restricts the bounds of an integer or floating-point expression.
+all_min_distance(): Constraint on the minimum absolute distance between a pair of integer expressions in an array.
+if_then(): Creates and returns the new constraint e1 => e2.
+allowed_assignments(): Explicitly defines allowed assignments for one or more integer expressions.
+forbidden_assignments(): Explicitly defines forbidden assignments for one or more integer expressions.
+standard_deviation(): Standard deviation of the values of the variables in an array.
+slope_piecewise_linear(): Evaluates piecewise-linear function given by set of breaking points and slopes.
+coordinate_piecewise_linear(): Evaluates piecewise-linear function given by set of breaking points and values.
+all_diff(): Check if multiple expressions are all different.
+bool_abstraction(): Abstracts the values of one array as boolean values in another array.
+pack(): Maintains the load on a set of containers given objects sizes and assignments.
+abstraction(): Abstracts the values of one array as values in another array.
+inverse(): Constrains elements of one array to be inverses of another.
+distribute(): Calculates and/or constrains the distribution of values taken by an array of integer expressions.
+lexicographic(): Constraint which maintains two arrays to be lexicographically ordered.
+strict_lexicographic(): Constraint which maintains two arrays to be strictly lexicographically ordered.
+sequence(): Constrains the number of occurrences of the values taken by the different subsets of consecutive k variables.
+strong(): Encourage CP Optimizer to produce stronger (higher inference) constraints.
+
+---------
+Objective
+
+Following functions are used to express what expression(s) is to be minimized or maximized.
+
+minimize(): Specify one expression to minimize.
+minimize_static_lex(): Specify several expressions to minimize.
+maximize(): Specify one expression to maximize.
+maximize_static_lex(): Specify several expressions to maximize.
+
+---------
+Scheduling functions
+
+Interval variables
+Following functions allow to construct expressions on interval variables:
+
+start_of(): Start of an interval variable.
+end_of(): End of an interval variable.
+length_of(): Length of an interval variable.
+size_of(): Size of an interval variable.
+presence_of(): Presence status of an interval variable.
+start_at_start(): Constrains the delay between the starts of two interval variables.
+start_at_end(): Constrains the delay between the start of one interval variable and end of another one.
+start_before_start(): Constrains the minimum delay between starts of two interval variables.
+start_before_end(): Constrains minimum delay between the start of one interval variable and end of another one.
+end_at_start(): Constrains the delay between the end of one interval variable and start of another one.
+end_at_end(): Constrains the delay between the ends of two interval variables.
+end_before_start(): Constrains minimum delay between the end of one interval variable and start of another one.
+end_before_end(): Constrains the minimum delay between the ends of two interval variables.
+forbid_start(): Forbids an interval variable to start during specified regions.
+forbid_end(): Forbids an interval variable to end during specified regions.
+forbid_extent(): Forbids an interval variable to overlap with specified regions.
+overlap_length(): Length of the overlap of two interval variables.
+start_eval(): Evaluates a segmented function at the start of an interval variable.
+end_eval(): Evaluates a segmented function at the end of an interval variable.
+size_eval(): Evaluates a segmented function on the size of an interval variable.
+length_eval(): Evaluates segmented function on the length of an interval variable.
+span(): Creates a span constraint between interval variables.
+alternative(): Creates an alternative constraint between interval variables.
+synchronize(): Creates a synchronization constraint between interval variables.
+isomorphism(): Creates a isomorphism constraint between two sets of interval variables.
+
+---------
+Scheduling functions
+Following functions allow to construct expressions on sequence variables:
+
+start_of_next(): Start of the interval variable that is next in a sequence.
+start_of_prev(): Start of the interval variable that is previous in a sequence.
+end_of_next(): End of the interval variable that is next in a sequence.
+end_of_prev(): End of the interval variable that is previous in a sequence.
+length_of_next(): Length of the interval variable that is next in a sequence.
+length_of_prev(): Length of the interval variable that is previous in a sequence.
+size_of_next(): Size of the interval variable that is next in a sequence.
+size_of_prev(): Size of the interval variable that is previous in a sequence.
+type_of_next(): Type of the interval variable that is next in a sequence.
+type_of_prev(): Type of the interval variable that is previous in a sequence.
+first(): Constrains an interval variable to be the first in a sequence.
+last(): Constrains an interval variable to be the last in a sequence.
+before(): Constrains an interval variable to be before another interval variable in a sequence.
+previous(): Constrains an interval variable to be previous to another interval variable in a sequence.
+no_overlap(): Constrains a set of interval variables not to overlap each others
+same_sequence(): creates a same-sequence constraint between two sequence variables.
+same_common_subsequence(): Creates a same-common-subsequence constraint between two sequence variables.
+
+---------
+Scheduling functions
+
+Cumulative expressions
+
+A cumul function expression is an expression whose value in a solution is a function from the set of integers to the set of non-negative integers. A cumul function expression represents the sum of individual contributions of intervals. A panel of elementary cumul function expressions is available to describe the individual contribution of an interval variable (or a fixed interval) to a cumul function expression:
+
+A pulse function is an elementary function defined by an interval variable (or a fixed interval) whose value is equal to 0 outside the interval and equal to a non-negative constant on the interval. This value is called the height of the pulse function.
+A step function is an elementary function defined by one of the end-points of an interval variable (its start or end) whose value is equal to 0 before this end-point and equal to a non-negative constant after the end-point. This value is called the height of the step function.
+A cumul function expression is defined as the sum of the above elementary functions or their opposite. Several constraints over cumul function expressions are provided. These constraints allow restricting the possible values of the function over the complete horizon or over some fixed or variable interval
+
+---------
+Scheduling functions
+
+Cumulative expressions
+Available methods to build expressions are:
+
+pulse(): Elementary cumul function of constant value between the start and the end of an interval.
+step_at(): Elementary cumul function of constant value after a given point.
+step_at_start(): Elementary cumul function of constant value after the start of an interval.
+step_at_end(): Elementary cumul function of constant value after the end of an interval.
+height_at_start(): Contribution of an interval variable to a cumul function at its start point.
+height_at_end(): Contribution of an interval variable to a cumul function at its end point.
+always_in(): Restrict the possible values of a cumul expression (or a state function) to a particular range
+cumul_range(): Limits the range of a cumul function expression.
+
+---------
+Scheduling functions
+
+State functions
+
+A state function is a decision variable whose value is a set of non-overlapping intervals over which the function maintains a particular non-negative integer state. In between those intervals, the state of the function is not defined, typically because of an ongoing transition between two states.
+
+A set of constraints are available to restrict the evolution of a state function:
+
+always_in(): Restrict the possible values of a state function (or a cumul expression) to a particular range.
+always_no_state(): Ensures that a state function is undefined on an interval.
+always_constant(): Ensures a constant state for a state function on an interval.
+always_equal(): Fixes a given state for a state function during a variable or fixed interval.
+
+---------
+Search phases
+Variable evaluators
+
+An evaluator of integer variables is an object that is used by selectors of variables to define instantiation strategies.
+
+domain_size(): Number of elements in the current domain of the variable chosen by the search.
+domain_max(): Maximum value in the current domain of the variable chosen by the search.
+domain_min(): Minimum value in the current domain of the variable chosen by the search.
+var_impact(): Average reduction of the search space of the variable chosen by the search.
+var_local_impact(): Impact of the variable computed at the current node of the search tree.
+var_index(): Index of the variable in an array of variables.
+var_success_rate(): Success rate of the variable.
+impact_of_last_branch(): Domain reduction that the last instantiation made by search has achieved on the evaluated variable.
+explicit_var_eval(): Variable evaluator that gives an explicit value to variables.
+
+---------
+Search phases
+Value evaluators
+
+An evaluator of integer values is an object that is used by value selectors to define instantiation strategies.
+
+value(): Returns as evaluation the value itself.
+value_impact(): Average reduction of the search space observed so far when instantiating the selected variable to the evaluated value.
+value_success_rate(): Success rate of instantiating the selected variable to the evaluated value.
+value_index(): Index of the value in an array of integer values.
+explicit_value_eval(): Gives an explicit evaluation to values.
+
+---------
+Search phases
+Variable selectors
+
+A selector of integer variables is used by variable choosers to define search strategies.
+
+select_smallest(): Selector of integer variables having the smallest evaluation according to a given evaluator.
+select_largest(): Selector of integer variables having the largest evaluation according to a given evaluator.
+select_random_var(): Selector of integer variables that selects a variable randomly.
+
+---------
+Search phases
+Value selectors
+
+A selector of integer values is used by value choosers to define search strategies.
+
+select_smallest(): Selector of integer values having the smallest evaluation according to a given evaluator.
+select_largest(): Selector of integer values having the smallest evaluation according to a given evaluator.
+select_random_value(): Selector of integer variable value assignments that selects a domain value randomly.
+
+---------
+Search phases
+
+A search phase is used to define instantiation strategies to help the embedded CP Optimizer search.
+
+search_phase(): Create a new search phase.
+
+---------
+docplex.cp.modeler.abs(x)
+Creates an expression that represents the absolute value of an expression.
+
+Function abs computes the absolute value of an integer or floating-point expression x. The type of the function is the same as the type of its argument.
+
+abs(x) is a more efficient way of writing max(x, -x).
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin abs() function if no model expression is found in the parameters.
+
+Parameters:	x – Integer or floating-point expression for which the absolute value is to be computed.
+Returns:	Model expression of type float or integer (same as argument type)
+
+---------
+docplex.cp.modeler.abs_of(x)[source]
+Creates an expression that represents the absolute value of an expression.
+
+Function abs_of computes the absolute value of an integer or floating-point expression x. The type of the function is the same as the type of its argument.
+
+abs_of(x) is a more efficient way of writing max(x, -x).
+
+Parameters:	x – Integer or floating-point expression for which the absolute value is to be computed.
+Returns:	Model expression of type float or integer (same as argument type)
+
+---------
+docplex.cp.modeler.abstraction(y, x, values, abstractValue)[source]
+Returns a constraint that abstracts the values of one array as values in another array.
+
+For constraint programming: returns a constraint that abstracts the values of expressions contained in one array to expressions contained in another array.
+
+This function returns a constraint that abstracts the values of the elements of one array of expressions (called x) in a model into the abstract value of another array of expressions (called y). In other words, for each element x[i], there is an expression y[i] corresponding to the abstraction of x[i] with respect to an array of numeric values. That is:
+
+x[i] = v with v in values if and only if y[i] = v
+x[i] = v with v not in values if and only if y[i] = abstractValue
+This constraint maintains a many-to-one mapping that makes it possible to define constraints that impinge only on a particular set of values from the domains of expressions. The abstract value (specified by abstractValue) must not be in the domain of x[i].
+
+Parameters:	
+y – An array of abstracted integer expressions.
+x – An array of reference integer expressions.
+values – An array of integer values to be abstracted.
+abstractValue – An escape value (integer constant)
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.all(lexpr)[source]
+Creates an expression representing the logical AND of an array of expressions.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin all() function if no model expression is found in the parameters.
+
+Parameters:	lexpr – Array (iterable) of expressions
+Returns:	A boolean expression representing the logical AND of all expressions in lexpr. Or the result of the builtin function all() if no model expression is in the list.
+
+---------
+docplex.cp.modeler.all_diff(arr, *args)[source]
+Returns a boolean expression stating that multiple expressions are all different.
+
+Note: up to CP Optimizer version 20.10 (included), all_diff is a constraint, meaning it can only be used at top-level of the model. After version 20.10, all_diff can be used as a boolean expression.
+
+Parameters:	
+arr – Array (list, tuple or iterable) of expressions, or first element of the list
+*args – Other expressions if first argument is a single expression
+Returns:	New boolean expression.
+
+---------
+docplex.cp.modeler.all_min_distance(exprs, distance)[source]
+Constraint on the minimum absolute distance between a pair of integer expressions in an array.
+
+This constraint makes sure that the absolute distance between any pair of integer expressions in exprs will be greater than or equal to the given integer distance. In short, for any i, j distinct indices of exprs , it enforces abs(exprs[i] - exprs[j]) >= distance.
+
+Parameters:	
+exprs – Array of integer expressions.
+distance – Integer value used to constrain the distance between two elements of exprs.
+Returns:	A new boolean expression
+
+---------
+docplex.cp.modeler.all_of(lexpr)[source]
+Creates an expression representing the logical AND of an array of boolean expressions.
+
+Parameters:	lexpr – Array (iterable) of boolean expressions
+Returns:	A boolean expression representing the logical AND of all expressions in lexpr. If the array is empty array of expressions, result is CP constant True.
+
+---------
+docplex.cp.modeler.allowed_assignments(exprs, values)[source]
+Explicitly defines possible assignments on one or more integer expressions.
+
+This boolean expression (which is interpreted as a constraint outside of an expression) determines whether the assignment to a single expression or to an array of expressions is contained within a value set or a tuple set respectively.
+
+The boolean expression will be true if and only if (depending on the signature):
+
+the single value of the integer expression exprs is present in the array values.
+the values of the integer expressions exprs are present in the tuple set tuples.
+The order of the constrained variables in the array exprs is important because the same order is respected in the tuple set tuples.
+
+Parameters:	
+exprs – A single integer expression, or an array of integer expressions
+values – An array of integer expressions, or a set of tuples, that specifies the combinations of allowed values of the expressions exprs.
+Returns:	A boolean expression
+
+---------
+docplex.cp.modeler.alternative(interval, array, cardinality=None)[source]
+Creates an alternative constraint between interval variables.
+
+This function creates an alternative constraint between interval variable interval and the set of interval variables in array. If no cardinality expression is specified, if interval is present, then one and only one of the intervals in array will be selected by the alternative constraint to be present, and the start and end values of interval will be the same as the ones of the selected interval. If a cardinality expression is specified, cardinality intervals in array will be selected by the alternative constraint to be present and the selected intervals will have the same start and end value as interval variable interval. Interval variable interval is absent if and only if all interval variables in array are absent.
+
+Parameters:	
+interval – Interval variable.
+array – Array of interval variables.
+cardinality (Optional) – Cardinality of the alternative constraint. By default, when this optional argument is not specified, a unit cardinality is assumed (cardinality=1).
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.always_constant(function, interval, isStartAligned=None, isEndAligned=None)[source]
+This constraint ensures a constant state for a state function on an interval.
+
+This function returns a constraint that ensures that function is defined everywhere on an interval variable interval when it is present or a fixed interval [start, end)) and remains constant over this interval.
+
+Generally speaking, the optional boolean values isStartAligned and isEndAligned allow synchronization of start and end with the intervals of the state function:
+
+When isStartAligned is true, it means that start must be the start of an interval of the state function.
+When isEndAligned is true, it means that end must be the end of an interval of the state function.
+Parameters:	
+function – Constrained state function.
+interval – Interval variable contributing to the cumul function, or fixed interval expressed as a tuple of 2 integers.
+isStartAligned (Optional) – Boolean flag that states whether the interval is start aligned (default: no alignment).
+isEndAligned (Optional) – Boolean flag that states whether the interval is end aligned (default: no alignment).
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.always_equal(function, interval, value, isStartAligned=None, isEndAligned=None)[source]
+This constraint fixes a given state for a state function during a variable or fixed interval.
+
+This function returns a constraint that ensures that function is defined everywhere on an interval interval when it is present or a fixed interval [start, end)), and remains equal to value val over this interval.
+
+Generally speaking, the optional boolean values isStartAligned and isEndAligned allow synchronization of start and end with the intervals of the state function:
+
+When isStartAligned is true, it means that start must be the start of an interval of the state function.
+When isEndAligned is true, it means that end must be the end of an interval of the state function.
+Parameters:	
+function – Constrained state function.
+interval – Interval variable contributing to the cumul function, or fixed interval expressed as a tuple of 2 integers.
+value – Value of the function during the interval.
+isStartAligned (Optional) – Boolean flag that states whether the interval is start aligned (default: no alignment).
+isEndAligned (Optional) – Boolean flag that states whether the interval is end aligned (default: no alignment).
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.always_in(function, interval, min, max, _x=None)[source]
+These constraints restrict the possible values of a cumulExpr or stateFunction to a particular range during a variable or fixed interval.
+
+These functions return a constraints that restricts the possible values of function to a particular range [min, max] during an interval variable interval or a fixed interval [start, end).
+
+In the case of an interval variable interval, this constraint is active only when the interval variable is present. If the interval is absent, the constraint is always satisfied, regardless of the value of function.
+
+When the constraint is posted on a state function, the range constraint holds only on the segments where the state function is defined.
+
+Parameters:	
+function – Constrained cumul expression or state function.
+interval – Interval variable contributing to the cumul function, or fixed interval expressed as a tuple of 2 integers.
+min – Minimum of the allowed range for values of function during the interval, in [0..intervalmax).
+max – Maximum of the allowed range for values of function during the interval, in [0..intervalmax).
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.always_no_state(function, interval)[source]
+This constraint ensures that a state function is undefined on an interval.
+
+This function returns a constraint that ensures that function is undefined everywhere on an interval (interval variable interval when it is present or fixed interval [start, end)). This constraint will ensure, in particular, that no interval variable that requires the function to be defined (see always_equal, always_constant) can overlap with interval variable interval or fixed interval [start, end)).
+
+Parameters:	
+function – Constrained state function.
+interval – Interval variable contributing to the cumul function, or fixed interval expressed as a tuple of 2 integers.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.any(lexpr)[source]
+Creates an expression representing the logical OR of an array of expressions.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin any() function if no model expression is found in the parameters.
+
+Parameters:	lexpr – Array (iterable) of expressions
+Returns:	A boolean expression representing the logical OR of all expressions in lexpr. Or the result of the builtin function any() if no model expression is in the list.
+
+---------
+docplex.cp.modeler.any_of(lexpr)[source]
+Creates an expression representing the logical OR of an array of boolean expressions.
+
+Parameters:	lexpr – Array (iterable) of boolean expressions
+Returns:	A boolean expression representing the logical OR of all expressions in lexpr. If the array is empty array of expressions, result is CP constant False.
+
+---------
+docplex.cp.modeler.before(sequence, interval1, interval2)[source]
+Constrains an interval variable to be before another interval variable in a sequence.
+
+This function returns a constraint that states that whenever both interval variables interval1 and interval2 are present, interval1 must be ordered before interval2 in the sequence variable sequence.
+
+Parameters:	
+sequence – Sequence variable.
+interval1 – First interval variables.
+interval2 – Second interval variables.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.bool_abstraction(y, x, values)[source]
+Creates a constraint that abstracts the values of one array as boolean values in another array.
+
+This function creates and returns a constraint that abstracts an array of integer expressions in a model. It differs from abstraction() in that elements each y[i] is Boolean.
+
+Like abstraction(), for each element x[i] there is an expression y[i] corresponding to the abstraction of x[i] with respect to the values array. That is:
+
+x[i] = v with v in values if and only if y[i] = true()
+x[i] = v with v not in values if and only if y[i] = false()
+This constraint maintains a many-to-one mapping that makes it possible to define constraints that impinge only on a particular set of values from the domains of constrained variables.
+
+Parameters:	
+y – An array of abstracted integer expressions.
+x – An array of reference integer expressions.
+values – An array of integer values to abstract.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.ceil(x)[source]
+Rounds a float expression upward to the nearest integer.
+
+Using this modeling expression implicitly constrain the float expression argument to be inside the integer value bounds [INT_MIN, INT_MAX].
+
+Parameters:	x – A float expression.
+Returns:	An integer expression representing ceil(x)
+
+---------
+docplex.cp.modeler.conditional(c, et, ef)[source]
+Creates and returns an expression that depends on a condition.
+
+This expression is equivalent of writing (c ? et : ef) in C++ or Java.
+
+Parameters:	
+c – Boolean expression
+et – Integer expression to return if condition c is true.
+ef – Integer expression to return if condition c is false.
+Returns:	Integer expression et or ef depending on the value of c.
+
+---------
+docplex.cp.modeler.constant(v)[source]
+Creates an expression from a numeric constant.
+
+This method is generally useless in Python as constants are automatically converted in model expressions. However, it can be useful if the expression has to be named.
+
+Parameters:	v – integer or float constant
+Returns:	A integer expression or float expression depending on the type of v.
+
+---------
+docplex.cp.modeler.coordinate_piecewise_linear(x, firstSlope, points, values, lastSlope)[source]
+Evaluates piecewise-linear function given by set of breaking points and values.
+
+This function evaluates piecewise-linear function at point x. The function consists of several segments separated by points, within each segment the function is linear. The function is defined by slope of the first segment (firstSlope), an array of breaking points (points) on x-axis, an array of corresponding values on y-axis (values) and the slope of the last segment. In each segment the function is linear. The function may be discontinuous, in this case it is necessary to specify the point of discontinuity twice in points.
+
+Assuming that the common length of arrays points and values is n, the function consists of the following linear segments:
+
+the segment 0 is defined on interval (-infinity, points*[0]) and is a linear function with slope *firstSlope ending at (*points*[0], *values*[0]).
+the segment i, i in 1, 2, .., n-1, is defined on the interval [*points*[i-1], *points*[i]) and is a linear function from (*points*[-1], *values*[i-1]) to (*points*[i], *values*[i]).
+the segment n is defined on the interval [points*[n-1], infinity) and is a linear function from (*points*[n-1], *values*[n-1]) with slope *lastSlope.
+Parameters:	
+x – x-value for which the function should be evaluated.
+firstSlope – slope of the first function segment (ending at (points[0], values[0])).
+points – sorted array of x-values that separate function segments (breaking points).
+values – y-values corresponding to the breaking points (the array must have the same length as points).
+lastSlope – slope of the last segment beginning at (points[n-1], values[n-1]) where n is length of points and values.
+Returns:	Value of the function at point x.
+
+---------
+docplex.cp.modeler.count(exprs, v)[source]
+Returns the number of occurrences of a given expression in a given array of integer expressions.
+
+This expression counts how many of the expressions in exprs take the value v.
+
+For convenience reasons, parameters can be expressed in the reverse order.
+
+Parameters:	
+exprs – An array of integer expressions.
+v – The value (integer) for which occurrences must be counted.
+Returns:	An integer expression representing the number of occurrences of v in exprs
+
+---------
+docplex.cp.modeler.count_different(exprs)[source]
+Creates an expression that counts the number of different values in an array of integer expressions.
+
+Parameters:	exprs – An array of integer expressions.
+Returns:	An integer expression representing the number of values that are different in exprs.
+
+---------
+docplex.cp.modeler.cumul_range(function, min, max)[source]
+Limits the range of a cumul function expression.
+
+This function returns a constraint that restricts the possible values of cumul function to belong to a range [min, max].
+
+Parameters:	
+function – Cumul function expression.
+min – Minimum of the range of allowed values for the cumul function.
+max – Maximum of the range of allowed values for the cumul function.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.diff(e1, e2)[source]
+Creates an expression representing the inequality of two expressions.
+
+The python operator ‘!=’ is overloaded to implement a call to this modeling method. Writing diff(e1, e2) is equivalent to write (e1 != e2).
+
+Parameters:	
+e1 – Integer or float expression
+e2 – Integer or float expression
+Returns:	A boolean expression representing (e1 != e2)
+
+---------
+docplex.cp.modeler.distribute(counts, exprs, values=None)[source]
+Calculates and/or constrains the distribution of values taken by an array of integer expressions.
+
+The distribute constraint is used to count the number of occurrences of several values in an array of constrained expressions. You can also use distribute to force a set of constrained expressions to assume values in such a way that only a limited number of the constrained expressions can assume each value.
+
+More precisely, for any index i of counts, counts[i] is equal to the number of expressions in exprs who have value of values[i]. When using the signature which has values missing, then the values counted are assumed to be a set spanning from 0 up to the size of the counts array, less one.
+
+Parameters:	
+counts – An array of integer expressions representing, for each element of values, its cardinality in exprs.
+exprs – An array of integer expressions for which value occurrences must be counted.
+values – (Optional) An integer array containing values to count.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.domain_max()[source]
+Variable evaluator that represents the maximum value in the current domain of the variable chosen by the search.
+
+Returns:	An evaluator of integer variable
+
+---------
+docplex.cp.modeler.domain_min()[source]
+Variable evaluator that represents the minimum value in the current domain of the variable chosen by the search.
+
+Returns:	An evaluator of integer variable
+
+---------
+docplex.cp.modeler.domain_size()[source]
+Variable evaluator that represents the number of elements in the current domain of the variable chosen by the search.
+
+Returns:	An evaluator of integer variable
+---------
+docplex.cp.modeler.element(array, index)[source]
+This function returns an element of a given array indexed by an integer expression.
+
+This function returns an expression for use in a constraint or other expression. The semantics of this expression are: when index takes the value i, then the value of the expression is equal to array[i].
+
+For convenience reasons, parameters can be expressed in any order.
+
+Possible argument and return type combinations are:
+
+(array of integers, integer expression) => integer expression
+(array of integer expressions, integer expression) => integer expression
+(array of floats, integer expression) => float expression
+(integer expression, array of integers) => integer expression
+(integer expression, array of integer expressions) => integer expression
+(integer expression, array of floats) => float expression
+Parameters:	
+array – An array in which an element will be selected using subscript.
+index – An integer expression used to retrieve array element.
+Returns:	A float or integer expression depending on the type of the array.
+
+---------
+docplex.cp.modeler.end_at_end(a, b, delay=None)[source]
+Constrains the delay between the ends of two interval variables.
+
+The function end_at_end constrains interval variables a and b in the following way. If both intervals a and b are present then interval b must end exactly at end_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. Note that delay can be negative.
+
+Parameters:	
+a – Interval variable.
+b – Interval variable.
+delay – Exact delay between ends of a and b. If not specified then zero is used.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.end_at_start(a, b, delay=None)[source]
+Constrains the delay between the end of one interval variable and start of another one.
+
+The function end_at_start constrains interval variables a and b in the following way. If both intervals a and b are present, then interval b must start exactly at end_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. Note that delay can be negative.
+
+Parameters:	
+a – Interval variables.
+b – Interval variables.
+delay – Exact delay between end of a and start of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.end_before_end(a, b, delay=None)[source]
+Constrains the minimum delay between the ends of two interval variables.
+
+The function end_before_end constrains interval variables a and b in the following way. If both interval variables a and b are present, then b cannot end before end_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. It is possible to specify a negative delay; in this case b can actually end before the end of a but still not sooner than end_of(a) + delay.
+
+Parameters:	
+a – Interval variable which ends before.
+b – Interval variable which ends after.
+delay – The minimal delay between end of a and end of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.end_before_start(a, b, delay=None)[source]
+Constrains minimum delay between the end of one interval variable and start of another one.
+
+The function end_before_start constrains interval variables a and b in the following way. If both interval variables a and b are present, then b cannot start before end_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. It is possible to specify even negative delay, in this case b can actually start before the end of a but still not sooner than end_of(a) + delay.
+
+Parameters:	
+a – Interval variable which ends before.
+b – Interval variable which starts after.
+delay – The minimal delay between end of a and start of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.end_eval(interval, function, absentValue=None)[source]
+Evaluates a segmented function at the end of an interval variable.
+
+Evaluates function at the start of interval variable interval. If interval is absent, it does not have any defined end and absentValue is returned.
+
+Parameters:	
+interval – Interval variable.
+function – Function to evaluate.
+absentValue (Optional) – Value to return if interval variable interval is absent. If not given, absent value is zero.
+Returns:	A float expression
+
+---------
+docplex.cp.modeler.end_of(interval, absentValue=None)[source]
+Returns the end of specified interval variable.
+
+This function returns an integer expression that is equal to end of the interval variable interval if it is present. If it is absent then the value of the expression is absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent. Zero if not given.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.end_of_next(sequence, interval, lastValue=None, absentValue=None)[source]
+Returns an integer expression that represents the end of the interval variable that is next.
+
+This function returns an integer expression that represents the end of the interval variable that is next to interval in sequence. When interval is present and is the last interval of sequence, it returns the constant integer value lastValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+lastValue – Value to return if interval variable interval is the last one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.end_of_prev(sequence, interval, firstValue=None, absentValue=None)[source]
+Returns an integer expression that represents the end of the interval variable that is previous.
+
+This function returns an integer expression that represents the end of the interval variable that is previous to interval in sequence variable sequence. When interval is present and is the first interval of sequence, it returns the constant integer value firstValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+firstValue – Value to return if interval variable interval is the first one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.equal(e1, e2)[source]
+Creates an expression representing the equality between two expressions.
+
+The python operator ‘==’ is overloaded to implement a call to this modeling method. Writing equal(e1, e2) is equivalent to write (e1 == e2).
+
+Parameters:	
+e1 – Integer or float expression
+e2 – Integer or float expression
+Returns:	A boolean expression representing (e1 == e2)
+
+---------
+docplex.cp.modeler.explicit_value_eval(vals, evals, defaultEval=None)[source]
+Value evaluator hat gives an explicit evaluation to values.
+
+The evaluations of elements of array vals are explicitly defined in the array evals, that is, the evaluation of vals[i] is evals[i]. The arrays vals and evals must have the same size.
+
+The evaluation of a value that does not appear in vals is given by defautEval.
+
+Parameters:	
+vals – Array of values
+evals – Array of the evaluations of values
+defaultEval (Optional) – Evaluation of a value that does not appears in vals. By default, this value is zero.
+Returns:	An evaluator of integer value
+
+---------
+docplex.cp.modeler.explicit_var_eval(vars, vals, defaultEval=None)[source]
+Variable evaluator that gives an explicit value to variables.
+
+The evaluations of variables in the array vars are explicitly defined in the array of values vals, that is the evaluation of vars[i] is vals[i]. The arrays vars and vals must have the same size.
+
+The evaluation of a variable that does not appear in the array is given by defautEval.
+
+Parameters:	
+vars – Array of integer variables
+vals – Array of values
+defaultEval (Optional) – Default value of a variable that is not in the array If not given, default eval value is zero.
+Returns:	
+An evaluator of integer variable
+
+---------
+docplex.cp.modeler.exponent(x)[source]
+Returns the exponentiation of an expression.
+
+Parameters:	x – A float expression.
+Returns:	A float expression representing exp(x)
+docplex.cp.modeler.false()[source]
+Returns a false boolean expression.
+
+The function false() does not have any particular purpose except for being a filler.
+
+CP Optimizer usually eliminates false() from expressions using partial evaluation.
+
+Returns:	An expression of type boolean expression
+
+---------
+docplex.cp.modeler.first(sequence, interval)[source]
+Constrains an interval variable to be the first in a sequence.
+
+This function returns a constraint that states that whenever interval variable interval is present, it must be ordered first in the sequence variable sequence.
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.float_div(e1, e2)[source]
+Creates an expression representing the float division of two expressions.
+
+The python operator ‘/’ is overloaded to implement a call to this modeling method. Writing float_div(e1, e2) is equivalent to write (e1 / e2).
+
+Parameters:	
+e1 – First integer or float expression
+e2 – Second integer or float expression
+Returns:	A float expression representing (e1 / e2).
+
+---------
+docplex.cp.modeler.floor(x)[source]
+Rounds a float expression down to the nearest integer.
+
+Using this modeling expression implicitly constrain the float expression argument to be inside the integer value bounds [INT_MIN, INT_MAX].
+
+Parameters:	x – A float expression.
+Returns:	An integer expression representing floor(x)
+
+---------
+docplex.cp.modeler.forbid_end(interval, function)[source]
+Forbids an interval variable to end during specified regions.
+
+In the declaration of an interval variable it is only possible to specify a range of possible end times. This function allows the user to specify more precisely when the interval variable can end. In particular, the interval variable can end only at point t such that the function has non-zero value at t-1. When the interval variable is absent then this constraint is automatically satisfied, since such interval variable does not’t have any start at all.
+
+Note the difference between t (end time of the interval variable) and t-1 (the point when the function value is checked). It simplifies the sharing of the same function in constraints forbid_start and forbid_end. It also allows one to use the same function as intensity parameter of interval variable.
+
+Parameters:	
+interval – Interval variable being restricted.
+function – If the function has value 0 at point t-1 then the interval variable interval cannot end at t.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.forbid_extent(interval, function)[source]
+Forbids an interval variable to overlap with specified regions.
+
+This function allows specification of forbidden regions that the interval variable interval cannot overlap with. In particular, if interval variable interval is present and if function has value 0 during interval [a,b) (i.e. [a,b) is a forbidden region) then either end <= a (interval ends before the forbidden region) or b <= start (interval starts after the forbidden region).
+
+If the interval variable interval is absent then the constraint is automatically satisfied (the interval does not exist therefore it cannot overlap with any region).
+
+Parameters:	
+interval – Interval variable being restricted.
+function – Forbidden regions corresponds to step of the function that have value 0.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.forbid_start(interval, function)[source]
+Forbids an interval variable to start during specified regions.
+
+This constraint restricts possible start times of interval variable using a step function. The interval variable can start only at points where the function value is not zero. When the interval variable is absent then this constraint is automatically satisfied, since such interval variable does not have any start at all.
+
+In declaration of an interval variable it is only possible to specify a range of possible start times. This function allows more precise specification of when the interval variable can start.
+
+Parameters:	
+interval – Interval variable being restricted.
+function – If the function has value 0 at point t then the interval variable interval cannot start at t.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.forbidden_assignments(exprs, values)[source]
+Explicitly defines forbidden assignments for one or more integer expressions.
+
+This boolean expression (which is interpreted as a constraint outside of an expression) determines whether the assignment to a single expression or to an array of expressions is not contained within a value set or a tuple set respectively.
+
+The boolean expression will be true if and only if (depending on the signature):
+
+the single value of the integer expression exprs is not present in the array values.
+the values of the array of integer expressions exprs are not present in the tuple set values.
+The order of the constrained variables in the array exprs is important because the same order is respected in the tuple set tuples.
+
+Parameters:	
+exprs – A single integer expression, or an array of integer expressions
+values – An array of integer expressions, or a set of tuples, that specifies the combinations of forbidden values of the expressions exprs.
+Returns:	A boolean expression
+
+---------
+docplex.cp.modeler.greater(e1, e2)[source]
+Creates an expression representing that an expression is greater than another.
+
+The python operator ‘>’ is overloaded to implement a call to this modeling method. Writing greater(e1, e2) is equivalent to write (e1 > e2).
+
+Parameters:	
+e1 – Integer or float expression
+e2 – Integer or float expression
+Returns:	A boolean expression representing (e1 > e2)
+
+---------
+docplex.cp.modeler.greater_or_equal(e1, e2)[source]
+Creates an expression representing that an expression is greater or equal to another.
+
+The python operator ‘>=’ is overloaded to implement a call to this modeling method. Writing greater_or_equal(e1, e2) is equivalent to write (e1 >= e2).
+
+Parameters:	
+e1 – Integer, float or cumul expression
+e2 – Integer, float or cumul expression
+Returns:	A boolean expression representing (e1 >= e2) A constraint expression if at least one argument is a cumul expression.
+
+---------
+docplex.cp.modeler.height_at_end(interval, function, absentValue=None)[source]
+Returns the contribution of an interval variable to a cumul function at its end point.
+
+Whenever interval variable interval is present, this function returns an integer expression that represents the total contribution of the end of interval variable interval to the cumul function.
+
+When interval variable interval is absent, this function returns a constant integer expression equal to absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+function – Cumul function expression.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.height_at_start(interval, function, absentValue=None)[source]
+Returns the contribution of an interval variable to a cumul function at its start point.
+
+Whenever interval variable interval is present, this function returns an integer expression that represents the total contribution of the start of interval variable interval to the cumul function.
+
+When interval variable interval is absent, this function returns a constant integer expression equal to absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+function – Cumul function expression.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.if_then(e1, e2)[source]
+Creates and returns the new constraint e1 => e2.
+
+Parameters:	
+e1 – First boolean expression
+e2 – Second boolean expression
+Returns:	A boolean expression stating that e1 => e2
+
+---------
+docplex.cp.modeler.impact_of_last_branch()[source]
+Variable evaluator that represents the domain reduction that the last instantiation made by search has achieved on the evaluated variable.
+
+Values returned range from 0 to 1.0. If the value is close to zero then there wasn’t much domain reduction on the evaluated variable during the last instantiation. If the value is close to one, the domain was reduced considerably.
+
+Returns:	An evaluator of integer variable
+
+---------
+docplex.cp.modeler.in_range(x, lb, ub)[source]
+Restricts the bounds of an integer or floating-point expression.
+
+This boolean expression (which is interpreted as a constraint outside of an expression) determines whether the value of expression x is inside the range [lb, ub]. The returned expression will be true if and only if x is no less than lb and no greater than ub.
+
+range(y, a, b) is also a more efficient form of writing a <= y && y <= b.
+
+Parameters:	
+x – The integer or floating-point expression.
+lb – The lower bound.
+ub – The upper bound.
+Returns:	An expression of type boolean expression
+
+---------
+docplex.cp.modeler.inferred(arr, *args)[source]
+Returns an expression stating that variables must not be inferred by the solver.
+
+Returns an expression which identifies certain variables as having their values inferred by the values taken on by non-inferred variables. The returned constraint expression can be added to a model to tell CP Optimizer that when all non-inferred variables (those which are included in no inferred constraint instances) are fixed, then all variables in arr will have their values determined, typically through equality constraints which are used to compute their values from the values of other variables. Informally, one might say that the variables so marked are not “decision” variables of the model.
+
+The returned expression should be used in models having only integer variables and where the “Neighborhood” search type is not being used. When used in this way, CP Optimizer uses inferred as a hint to improve its performance.
+
+Note: No errors occur should CP Optimizer not be able to easily determine the value of a variable in arr after all non-inferred variables are fixed. CP Optimizer will silently consider those as normal decision variables in this case.
+
+Note: Another common way of representing calculations which are not decisions in a model is to use expressions to calculate derived values from the values of decision variables. inferred can be useful when it is impossible (or complicated) to represent a calculation in a “loop-free” way. This is common when a global constraint would maintain the values, but any expression needs to be created before using the global constraint. As an example, the inverse(IloIntExpr[], IloIntExpr[]) constraint takes two arrays of variables a and b and maintains a one-to-one correspondance between the values of the variables: when the variables in (say) a are fixed, then the variables in b can be easily calculated. Here, we may consider b to be inferred from a (or indeed, that a is inferred from b).
+
+Parameters:	
+arr – Array (list, tuple or iterable) of integer variables, or first element of the list
+*args – Other integer variables if first argument is a single integer variable
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.int_div(e1, e2)[source]
+Creates an expression representing the integer division of two expressions.
+
+The python operator ‘//’ is overloaded to implement a call to this modeling method. Writing int_div(e1, e2) is equivalent to write (e1 // e2).
+
+Parameters:	
+e1 – First integer expression
+e2 – Second integer expression
+Returns:	
+An integer expression representing (e1 // e2).
+
+---------
+docplex.cp.modeler.inverse(f, invf)[source]
+Constrains elements of one array to be inverses of another.
+
+This function creates an inverse constraint such that if the length of the arrays f and invf is n, then this function returns a constraint that ensures that:
+
+for all i in the interval [0, n-1], invf[f[i]] == i*
+for all j in the interval [0, n-1], f[invf[j]] == j*
+Parameters:	
+f – An integer expression array.
+invf – An integer expression array.
+Returns:	Constraint expression
+---------
+docplex.cp.modeler.isomorphism(array1, array2, map=None, absentValue=None)[source]
+Returns an isomorphism constraint between two sets of interval variables.
+
+This function creates an isomorphism constraint between the set of interval variables in the array array1 and the set of interval variables in the array array2. If an integer expression array map is used, it is used to reflect the mapping of the intervals of array1 on the intervals of array2, that is, interval variable array2[i], if present, is mapped on interval variable array1[map[i]]*. If array2[i] is absent, index map[i] takes value absentValue.
+
+Parameters:	
+array1 – The first array of interval variables.
+array2 – The second array of interval variables.
+map – (Optional) Array of integer expressions mapping intervals of array2 on array1.
+absentValue (Optional) – Integer value of map[i] when array2[i] is absent.
+Possible argument and return type combinations are:
+
+(array of interval variables, array of interval variables, array of integer expressions [=None], integer constant [=None]) => constraint
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.last(sequence, interval)[source]
+Constrains an interval variable to be the last in a sequence.
+
+This function returns a constraint that states that whenever interval variable interval is present, it must be ordered last in the sequence variable sequence.
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.length_eval(interval, function, absentValue=None)[source]
+Evaluates segmented function on the length of an interval variable.
+
+Evaluate function for the x value equal to the length of interval variable interval. If interval is absent then it does not have any defined length and absentValue is returned.
+
+Parameters:	
+interval – Interval variable.
+function – Function to evaluate.
+absentValue (Optional) – Value to return if interval variable interval is absent. If not given, absent value is zero.
+Returns:	A float expression
+
+---------
+docplex.cp.modeler.length_of(interval, absentValue=None)[source]
+Returns the length of specified interval variable.
+
+This function returns an integer expression that is equal to the length (end - start) of the interval variable interval if it is present. If it is absent, then the value of the expression is absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent. Zero if not given.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.length_of_next(sequence, interval, lastValue=None, absentValue=None)[source]
+Returns an integer expression that represents the length of the interval variable that is next.
+
+This function returns an integer expression that represents the length of the interval variable that is next to interval in sequence variable sequence. When interval is present and is the last interval of sequence, it returns the constant integer value lastValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+lastValue – Value to return if interval variable interval is the last one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.length_of_prev(sequence, interval, firstValue=None, absentValue=None)[source]
+Returns an integer expression that represents the length of the interval variable that is previous.
+
+This function returns an integer expression that represents the length of the interval variable that is previous to interval in sequence variable sequence. When interval is present and is the first interval of sequence, it returns the constant integer value firstValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+firstValue – Value to return if interval variable interval is the first one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+---------
+docplex.cp.modeler.less(e1, e2)[source]
+Creates an expression representing that an expression is less than another.
+
+The python operator ‘<’ is overloaded to implement a call to this modeling method. Writing less(e1, e2) is equivalent to write (e1 < e2).
+
+Parameters:	
+e1 – Integer or float expression
+e2 – Integer or float expression
+Returns:	A boolean expression representing (e1 < e2)
+
+---------
+docplex.cp.modeler.less_or_equal(e1, e2)[source]
+Creates an expression for operation lessOrEqual.
+
+The python operator ‘<=’ is overloaded to implement a call to this modeling method. Writing less(e1, e2) is equivalent to write (e1 <= e2).
+
+Parameters:	
+e1 – Integer, float or cumul expression
+e2 – Integer, float or cumul expression
+Returns:	A boolean expression representing (e1 <= e2). A constraint expression if at least one argument is a cumul expression.
+
+---------
+docplex.cp.modeler.lexicographic(x, y)[source]
+Returns a constraint which maintains two arrays to be lexicographically ordered.
+
+The lexicographic function returns a constraint which maintains two arrays to be lexicographically ordered.
+
+More specifically, lexicographic(x, y) maintains that x is less than or equal to y in the lexicographical sense of the term. This means that either both arrays are equal or that there exists i < size(x) such that for all j < i, x[j] = y[j] and x[i] < y[i].
+
+Note that the size of the two arrays must be the same.
+
+Parameters:	
+x – An array of integer expressions.
+y – An array of integer expressions.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.log(x)[source]
+Returns the logarithm of an expression
+
+Parameters:	x – A float expression.
+Returns:	A float expression representing log(x)
+
+---------
+docplex.cp.modeler.logical_and(e1, e2=None)[source]
+Creates an expression representing the logical AND of two boolean expressions, or of an array of expressions.
+
+The python operator ‘&’ is overloaded to implement a call to this modeling method. Writing logical_and(e1, e2) is equivalent to write (e1 & e2).
+
+Note that python keyword ‘and’ can not be overloaded. Operator ‘&’ is an operator that is usually used for binary operations, with a priority that is different that the logical ‘and’. We recommend to always fully parenthesise expressions that use such binary operators in place of logical operators.
+
+Parameters:	
+e1 – First boolean expression, or array of expressions
+e2 – (Optional) Second boolean expression.
+Returns:	A boolean expression representing (e1 and e2), or logical and of all expressions in array e1. If e1 is an empty array of expressions, result is CP constant True.
+
+---------
+docplex.cp.modeler.logical_not(e)[source]
+Creates an expression representing the logical NOT of a boolean expression.
+
+The python operator ‘~’ is overloaded to implement a call to this modeling method. Writing logical_not(e is equivalent to write (~e).
+
+Note that python keyword ‘not’ can not be overloaded. Operator ‘~’ is an operator that is usually used for binary operations, with a priority that is different that the logical ‘not’. We recommend to always fully parenthesise expressions that use such binary operators in place of logical operators.
+
+Parameters:	e – Boolean expression
+Returns:	A boolean expression representing not(e).
+
+---------
+docplex.cp.modeler.logical_or(e1, e2=None)[source]
+Creates an expression representing the logical OR of two boolean expressions, or of an array of expressions.
+
+The python operator ‘|’ is overloaded to implement a call to this modeling method. Writing logical_or(e1, e2) is equivalent to write (e1 | e2).
+
+Note that python keyword ‘or’ can not be overloaded. Operator ‘|’ is an operator that is usually used for binary operations, with a priority that is different that the logical ‘or’. We recommend to always fully parenthesise expressions that use such binary operators in place of logical operators.
+
+Parameters:	
+e1 – First boolean expression, or array of expressions
+e2 – (Optional) Second boolean expression.
+Returns:	A boolean expression representing (e1 or e2), or logical or of all expressions in array e1. If e1 is an empty array of expressions, result is CP constant False.
+
+---------
+docplex.cp.modeler.max(arr, *args, **kwargs)[source]
+Computes the maximum of an array of integer or floating-point expressions.
+
+The max function returns an expression which has the same value as the maximum of the supplied arguments. The return type corresponds to the type of arguments supplied.
+
+List of expressions can be given extensively, or as a single iterable of expressions.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin max() function if no model expression is found in the parameters.
+
+Parameters:	
+arr – Array of integer or floating-point expressions, or first expression of the list
+*args – Other expressions if first argument is not already an iterable
+Returns:	An integer or float expression according to the type of parameters.
+
+
+---------
+docplex.cp.modeler.max_of(arr, *args)[source]
+Computes the maximum of an array or a list of integer or floating-point expressions.
+
+The max_of function returns an expression which has the same value as the maximum of the supplied arguments. The return type corresponds to the type of arguments supplied.
+
+List of expressions can be given extensively, or as a single iterable of expressions.
+
+Parameters:	
+arr – Array of integer or floating-point expressions, or first expression of the list
+*args – Other expressions if first argument is not already an iterable
+Returns:	
+An integer or float expression according to the type of parameters.
+
+
+---------
+docplex.cp.modeler.maximize(expr)[source]
+This function asks CP Optimizer to seek to maximize the value of an expressions.
+
+The function maximize specifies to CP Optimizer a floating-point expression whose value is sought to be maximized. When this function is used and the problem is feasible, CP Optimizer will generate one or more feasible solutions to the problem, with subsequent solutions having a larger value of expr than preceding ones. The search terminates when either the optimality of the last solution is proved, a search limit is exhausted, or the search is aborted.
+
+Parameters:	expr – The float expression to be maximized.
+Returns:	An objective expression
+
+---------
+docplex.cp.modeler.maximize_static_lex(exprs)[source]
+A function to specify an optimization problem. It asks CP Optimizer to seek to lexicographically maximize the values of a number of expressions.
+
+The function maximize_static_lex specifies to CP Optimizer a number of floating-point expressions whose values are sought to be maximized in a lexicographic fashion. When this function is used and the problem is feasible, CP Optimizer will generate one or more feasible solutions to the problem, with subsequent solutions having a lexicographically larger value of exprs than preceding ones. This means that a new solution replaces the preceding one as incumbent if the value of criterion exprs[i] is greater than in the preceding solution, so long as the values of criteria exprs[0..i-1] are not less than in the preceding solution. In particular, this means that the newer solution is preferable even if there are arbitrary reductions in the values of criteria after position i in exprs, as compared with the preceding solution. The search terminates when either the optimality of the last solution is proved, a search limit is exhausted, or the search is aborted.
+
+Parameters:	exprs – A non-empty array of floating-point expressions whose values are to be lexicographically maximized.
+Returns:	An expression of type objective
+
+---------
+docplex.cp.modeler.member(element, array)[source]
+Checks if an integer expression is member of an array of expressions.
+
+DEPRECATED: use allowed_assignments(): instead.
+
+Parameters:	
+element – Integer expression whose value is to check in the array.
+array – Array of integer values
+Returns:	
+A boolean expression denoting the presence of the value in the array.
+
+
+---------
+docplex.cp.modeler.min(arr, *args, **kwargs)[source]
+Computes the minimum of an array of integer or floating-point expressions.
+
+The min function returns an expression which has the same value as the minimum of the supplied arguments. The return type corresponds to the type of arguments supplied.
+
+List of expressions can be given extensively, or as a single iterable of expressions.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin min() function if no model expression is found in the parameters.
+
+Parameters:	
+arr – Array of integer or floating-point expressions, or first expression of the list
+*args – Other expressions if first argument is not already an iterable
+Returns:	
+An integer or float expression according to the type of parameters.
+
+
+---------
+docplex.cp.modeler.min_of(arr, *args)[source]
+Computes the minimum of an array or a list of integer or floating-point expressions.
+
+The min_of function returns an expression which has the same value as the minimum of the supplied arguments. The return type corresponds to the type of arguments supplied.
+
+List of expressions can be given extensively, or as a single iterable of expressions.
+
+Parameters:	
+arr – Array of integer or floating-point expressions, or first expression of the list
+*args – Other expressions if first argument is not already an iterable
+Returns:	
+An integer or float expression according to the type of parameters.
+
+
+---------
+docplex.cp.modeler.minimize(expr)[source]
+This function asks CP Optimizer to seek to minimize the value of an expressions.
+
+The function minimize specifies to CP Optimizer a floating-point expression whose value is sought to be minimized. When this function is used and the problem is feasible, CP Optimizer will generate one or more feasible solutions to the problem, with subsequent solutions having a smaller value of expr than preceding ones. The search terminates when either the optimality of the last solution is proved, a search limit is exhausted, or the search is aborted.
+
+Parameters:	expr – The float expression to be minimized.
+Returns:	An objective expression
+
+---------
+docplex.cp.modeler.minimize_static_lex(exprs)[source]
+A function to specify an optimization problem. It asks CP Optimizer to seek to lexicographically minimize the values of a number of expressions.
+
+The function minimize_static_lex specifies to CP Optimizer a number of floating-point expressions whose values are sought to be minimized in a lexicographic fashion. When this function is used and the problem is feasible, CP Optimizer will generate one or more feasible solutions to the problem, with subsequent solutions having a lexicographically smaller value of exprs than preceding ones. This means that a new solution replaces the preceding one as incumbent if the value of criterion exprs[i] is less than in the preceding solution, so long as the values of criteria exprs[0..i-1] are not greater than in the preceding solution. In particular, this means that the newer solution is preferable even if there are arbitrary increases in the values of criteria after position i in exprs, as compared with the preceding solution. The search terminates when either the optimality of the last solution is proved, a search limit is exhausted, or the search is aborted.
+
+Parameters:	exprs – A non-empty array of floating-point expressions whose values are to be lexicographically minimized.
+Returns:	An objective expression
+
+---------
+docplex.cp.modeler.minus(e1, e2=None)[source]
+Creates an expression that represents the difference between two expressions, or the unary minus of a single one.
+
+This method can be called with one or two arguments. With one argument, it returns an expression representing the unary minus of its argument. With two arguments, it creates an expression representing the difference between the first and the second argument. Possible argument and return type combinations are:
+
+The python operator ‘-’ is overloaded to implement a call to this modeling method. Writing minus(e1, e2) is equivalent to write (e1 - e2), and writing minus(e1) is equivalent to write (-e1).
+
+Parameters:	
+e1 – First expression that can be integer expression, float expression or cumul expression
+e2 – Optional. Second expression that can be integer expression, float expression or cumul expression
+Returns:	An expression representing (e1 - e2), or -e1 if e2 is not given. The expression is integer expression, float expression or cumul expression depending on the type of the arguments.
+
+
+---------
+docplex.cp.modeler.mod(e1, e2)[source]
+Creates an expression representing the modulo of two expressions.
+
+The python operator ‘%’ is overloaded to implement a call to this modeling method. Writing mod(e1, e2) is equivalent to write (e1 % e2).
+
+Parameters:	
+e1 – First integer expression
+e2 – Second integer expression
+Returns:	An integer expression representing (e1 % e2).
+
+
+---------
+docplex.cp.modeler.no_overlap(sequence, distance_matrix=None, is_direct=None)[source]
+Constrains a set of interval variables not to overlap each others.
+
+This function returns a constraint over a set of interval variables {a1, …, an} that states that all the present intervals in the set are pairwise non-overlapping. It means that whenever both interval variables ai and aj, i!=j are present, ai is constrained to end before the start of aj or aj is constrained to end before the start of ai.
+
+If the no-overlap constraint has been built on an interval sequence variable sequence, it means that the no-overlap constraint works on the set of interval variables {a1, …, an} of the sequence and that the order of interval variables of the sequence will describe the order of the non-overlapping intervals. That is, if ai and aj, i!=j are both present and if ai appears before aj in the sequence value, then ai is constrained to end before the start of aj. If a transition matrix distance_matrix is specified and if tpi and tpj respectively denote the types of interval variables ai and aj in the sequence, it means that a minimal distance distance_matrix[tpi,tpj] is to be maintained between the end of ai and the start of aj. If boolean flag is_direct is True, the transition distance holds between an interval and its immediate successor in the sequence. If is_direct is False (default), the transition distance holds between an interval and all its successors
+
+in the sequence.
+If the first argument is an array of interval variables, the two others are ignored.
+
+Parameters:	
+sequence – A sequence variable, or an array of interval variables.
+distance_matrix (Optional) – An optional transition matrix defining the transition distance between consecutive interval variables. Transition matrix is given as an iterable of iterables of positive integers, or as the result of a call to the method transition_matrix().
+is_direct (Optional) – A boolean flag stating whether the distance specified in the transition matrix distance_matrix holds between direct successors (is_direct=True) or also between indirect successors (is_direct=False, default).
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.overlap_length(interval, interval2, absentValue=None)[source]
+Returns the length of the overlap of two interval variables.
+
+This function returns an integer expression that represents the length of the overlap of interval variable interval and the interval variable interval2 whenever the interval variables interval and interval2 are present. When one of the interval variables interval or interval2 is absent, the function returns the constant integer value absentValue (zero by default).
+
+Optionally, interval2 can be a constant interval [start, end) expressed as a tuple of two integers. When the interval variable interval is absent, the function returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable
+interval2 – Another interval variable, or fixed interval expressed as a tuple of 2 integers.
+absentValue (Optional) – Value to return if some interval variable is absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.pack(load, where, size, used=None)[source]
+Maintains the load on a set of containers given objects sizes and assignments.
+
+The pack constraint is used to represent sub-problems where the requirement is to assign objects to containers such that the capacities or minimum fill levels of the containers are respected.
+
+Let’s assume we have n objects and m containers. The sizes of the array arguments of pack must correspond to these constants, that is load must be of size m, whereas where and size must be of size n. Given assignments to the where expressions, the pack constraint will calculate the values of the load and used expressions.
+
+All counting is done from 0, and so the interpretation of 5 being assigned to where[3] is that object 3 (the 4th object) is placed into container 5 (the 6th container). This will be reflected by the inclusion of the size of object 3 (size[3]) being included in the calculation of the value of load[5].
+
+Naturally, all the arguments (with the exception of size) can be constrained by additional constraints. The most common form is to limit the capacity of a container. For example, to limit container 2 to a capacity of 15, one would write load[2] <= 15. Minimum fill level requirements can also be specified this way: for example load[2] >= 12. Other more esoteric constraints are possible, for example to say that only an even number of containers can be used: (used % 2) == 0. If used is omitted from the signature, then it will not be possible to specifically constrain the number of containers used.
+
+Parameters:	
+load – An array of integer expressions, each element representing the load (total size of the objects inside) of the corresponding container.
+where – An array of integer expressions, each element representing in which container the corresponding object is placed.
+size – An array of integers, each element representing the size of the corresponding object.
+used – (Optional) An integer expression indicating the number of used containers. That is, the number of containers with at least one object inside.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.plus(e1, e2)[source]
+Creates an expression that represents the addition of two expressions.
+
+The python operator ‘+’ is overloaded to implement a call to this modeling method. Writing plus(e1, e2) is equivalent to write (e1 + e2).
+
+Parameters:	
+e1 – First expression that can be integer expression, float expression or cumul expression
+e2 – Second expression that can be integer expression, float expression or cumul expression
+Returns:	An expression representing (e1 + e2). The expression is integer expression, float expression or cumul expression depending on the type of the arguments.
+
+
+---------
+docplex.cp.modeler.power(v, p)[source]
+Creates an expression that represents the power of an expression by another.
+
+The python operator ‘**’ is overloaded to implement a call to this modeling method. Writing power(e1, e2) is equivalent to write (e1 * e2)*.
+
+Parameters:	
+v – Float expression
+p – Power float expression
+Returns:	A float expression representing (e1 ** e2).
+
+
+---------
+docplex.cp.modeler.presence_of(interval)[source]
+Returns the presence status of an interval variable.
+
+This function returns a boolean expression that represents the presence status of an interval variable. If interval is present then the value of the expression is 1; if interval is absent then the value is 0.
+
+Use presence_of to express logical relationships between interval variables. Note that the most effective are binary relations such as presence_of(x)=>presence_of(y) because CP Optimizer is able to take them into account during propagation of other constraints such as end_before_start or no_overlap.
+
+The function presence_of can be also used to compute cost associated with execution/non-execution of an interval.
+
+Parameters:	interval – Interval variable.
+Returns:	An expression of type boolean expression
+
+---------
+docplex.cp.modeler.previous(sequence, interval1, interval2)[source]
+Constrains an interval variable to be previous to another interval variable in a sequence.
+
+This function returns a constraint that states that whenever both interval variables interval1 and interval2 are present, interval1 must be the interval variable that is previous to interval2 in the sequence variable sequence.
+
+Parameters:	
+sequence – Sequence variable.
+interval1 – Interval variable.
+interval2 – Interval variable.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.pulse(interval, height, _x=None)[source]
+Returns an elementary cumul function of constant value between the start and the end of an interval.
+
+This function returns an elementary cumul function expression that is equal to a value height everywhere between the start and the end of an interval variable interval or a fixed interval [start, end).
+
+The function is equal to 0 outside of the interval.
+
+When interval variable interval is absent, the function is the constant zero function.
+
+When a range [heightMin, heightMax) is specified it means that the height value of the pulse is part of the decisions of the problem and will be fixed by the engine within this specified range.
+
+Parameters:	
+interval – Interval variable contributing to the cumul function, or fixed interval expressed as a tuple of 2 integers.
+height – Non-negative integer representing the height of the contribution, or tuple of 2 non-negative integers representing the range of possible values for the height of the contribution. This last case is available only if interval is an interval variable.
+Returns:	A cumul atom expression
+
+
+---------
+docplex.cp.modeler.range(x, lb=None, ub=None)[source]
+Restricts the bounds of an integer or floating-point expression.
+
+This boolean expression (which is interpreted as a constraint outside of an expression) determines whether the value of expression x is inside the range [lb, ub]. The returned expression will be true if and only if x is no less than lb and no greater than ub.
+
+range(y, a, b) is also a more efficient form of writing a <= y && y <= b.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin range() function if no model expression is found in the parameters.
+
+Parameters:	
+x – The integer or floating-point expression.
+lb – The lower bound.
+ub – The upper bound.
+Returns:	An expression of type boolean expression
+
+
+---------
+docplex.cp.modeler.round(x)[source]
+Rounds a float expression to the nearest integer.
+
+Using this modeling expression implicitly constrain the float expression argument to be inside the integer value bounds [INT_MIN, INT_MAX].
+
+Parameters:	x – A float expression.
+Returns:	An integer expression representing round(x)
+
+---------
+docplex.cp.modeler.same_common_subsequence(seq1, seq2, array1=None, array2=None)[source]
+This function creates a same-common-subsequence constraint between two sequence variables.
+
+If no interval variable array is specified as argument, the mapping between interval variables of the two sequences is given by the order of the interval variables in the arrays array1 and array2 used in the definition of the sequences.
+
+If interval variable arrays array1 and array2 are used, these arrays define the mapping between interval variables of the two sequences. Those two arrays should be of the same size. Array array1 must only contain interval variables of sequence seq1 without any duplicate and array array2 must only contain interval variables of sequence seq2 without any duplicate.
+
+The constraint states that the sub-sequences defined by seq1 and seq2 by only considering the pairs of present intervals (array1[i], array2[i]) are identical modulo the mapping between intervals array1[i] and array2[i].
+
+Parameters:	
+seq1 – First constrained sequence variables.
+seq2 – Second constrained sequence variables.
+array1 (Optional) – First array of interval variables defining the mapping between the two sequence variables.
+array2 (Optional) – Second array of interval variables defining the mapping between the two sequence variables.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.same_sequence(seq1, seq2, array1=None, array2=None)[source]
+This function creates a same-sequence constraint between two sequence variables.
+
+The constraint states that the two sequences seq1 and seq2 are identical modulo a mapping between intervals array1[i] and array2[i].
+
+Sequence variables seq1 and seq2 should be of the same size n. If no array of interval variables is specified, the mapping between interval variables of the two sequences is given by the order of the interval variables in the arrays array1 and array2 used in the definition of the sequences.
+
+If interval variable arrays array1 and array2 are used, these arrays define the mapping between interval variables of the two sequences.
+
+Parameters:	
+seq1 – First constrained sequence variables.
+seq2 – Second constrained sequence variables.
+array1 (Optional) – First array of interval variables defining the mapping between the two sequence variables.
+array2 (Optional) – Second array of interval variables defining the mapping between the two sequence variables.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.scal_prod(x, y)[source]
+Returns the scalar product of two vectors.
+
+The function scal_prod returns an integer or floating-point expression that represents the scalar product of two vectors x and y. Depending on the type of x and y the result is either integer or floating-point expression.
+
+The versions with one array of constants, integer or float, can be slightly faster.
+
+Each argument can be:
+
+an array of integer constants,
+an array of float constants,
+an array of integer expressions
+an array of float expressions.
+Parameters:	
+x – First input array to be multiplied.
+y – Second input array to be multiplied.
+Returns:	An expression of type float expression or integer expression
+
+
+---------
+docplex.cp.modeler.search_phase(vars=None, varchooser=None, valuechooser=None)[source]
+Creates a search phase.
+
+A search phase is composed of:
+
+an array of variables to instantiate,
+a variable chooser that defines how the next variable to instantiate is chosen
+a value chooser that defines how values are chosen when instantiating variables.
+The embedded search strategy, determined by the value of the solver parameter SearchType, will use the search phases to instantiate the variables for which a search phase is specified.
+
+Several search phases can be given to the CP model using method 
+---------
+docplex.cp.model.CpoModel.set_search_phases() or 
+docplex.cp.model.CpoModel.add_search_phase().
+
+The order of the search phases in the array is important. In the CP search strategy, the variables will be instantiated phase by phase starting by the first phase of the array. It is not necessary that the variables in the search phases cover all the variables of the problem. It can be assumed that a search phase containing all the problem variables is implicitly added to the end of the given array of search phases.
+
+A search phase can be created with an array of variables only. The embedded search will then choose an instantiation strategy automatically. For instance, assuming that x and y are arrays of integer variables, the following code:
+
+mdl.set_search_phases([search_phase(x), search_phase(y)])
+indicates to CP search that variables from the array x must be instantiated before those from the array y. The way to instantiate them will be chosen by CP search.
+
+Similarly, it is not necessary to specify an array of variables to a search phase. A search phase defined this way will be applied to every integer variable extracted from the model.
+
+Parameters:	
+vars (Optional) – Array of integer, interval or sequence variables.
+varchooser (Optional) – Chooser of integer variable. Used only if vars is undefined or contains an array of integer variables. Must be defined if a valuechooser is defined.
+valuechooser (Optional) – Chooser of integer value Used only if vars is undefined or contains an array of integer variables. Must be defined if a varchooser is defined.
+Returns:	A search phase expression
+
+
+---------
+docplex.cp.modeler.select_largest(evaluator, minNumber=None, tolerance=None)[source]
+Selector of integer variables or value having the largest evaluation according to a given evaluator.
+
+This function returns a selector of value assignments to a variable that selects all values having the largest evaluation according to the evaluator e.
+
+If minNumber is provided, this function returns a selector of integer variable or value assignments that selects at least minNumber values having the largest evaluation according to the evaluator. The parameter minNumber must be at least 1. For example, suppose that eight domain values (1-8) have evaluations (1) 5, (2) 8, (3) 3, (4) 9, (5) 2, (6) 8, (7) 1, (8) 7. When ordered by decreasing evaluation, this gives: (4) 9, (2) 8, (6) 8, (8) 7, (1) 5, (3) 3, (5) 2, (7) 1. If minNumber is 1, then value 4 would be selected, if it is 2 or 3, then values 2 and 6 would be selected, and if it is 4 then values 4, 2, 6, and 8 would be selected. Note that when minNumber is 2, both 2 and 6 are selected as both are considered equivalent. In addition, it is possible to specify a non-integer value of minNumber. In this case, at least floor(minNumber) selections are made, with probability minNumber - floor(minNumber) of selecting an additional value. It is still possible that this selector can select less domain values than minNumber if there are less than minNumber values supplied to it for selection, in which case all supplied values are selected.
+
+If tolerance is provided (exclusively with minNumber), this function returns a selector of integer variable or value assignments that selects all domain values whose evaluations are in the range [max - tolerance, max], where max is is the maximum valuation by the evaluator over the domain values to be evaluated. The parameter tolerance must be non-negative.
+
+Parameters:	
+evaluator – Evaluator of integer variable or integer value
+minNumber (Optional) – Minimum number of values that are selected, with the smallest evaluation according to the evaluator e
+tolerance (Optional) – Tolerance of the values to be selected
+Returns:	An expression of type selector of integer value or selector of integer variable
+
+
+---------
+docplex.cp.modeler.select_random_value()[source]
+Selector of integer variable value assignments that selects a domain value randomly.
+
+This selector selects only one value.
+
+Returns:	A selector of integer value
+
+---------
+docplex.cp.modeler.select_random_var()[source]
+Selector of integer variables that selects a variable randomly.
+
+This selector selects only one variable.
+
+Returns:	A selector of integer variable
+
+---------
+docplex.cp.modeler.select_smallest(evaluator, minNumber=None, tolerance=None)[source]
+Selector of integer variables or value having the smallest evaluation according to a given evaluator.
+
+This function returns a selector of value assignments to a variable that selects all values having the smallest evaluation according to the evaluator e.
+
+If minNumber is provided, this function returns a selector of integer variable or value assignments that selects at least minNumber values having the smallest evaluation according to the evaluator. The parameter minNumber must be at least 1. For example, suppose that eight domain values (1-8) have evaluations (1) 9, (2) 5, (3) 6, (4) 3, (5) 8, (6) 1, (7) 3, (8) 2. When ordered by increasing evaluation, this gives: (6) 1, (8) 2, (4) 3, (7) 3, (2) 5, (3) 6, (5) 8, (1) 9. If minNumber is 1, then value 6 would be selected, if it is 2, then values 6 and 8 would be selected, and if it is 3 then values 6, 8, 4 and 7 would be selected. Note that when minNumber is 3, both values 4 and 7 are selected as both are considered equivalent. In addition, it is possible to specify a non-integer value of minNumber. In this case, at least floor(minNumber) selections are made, with probability minNumber - floor(minNumber) of selecting an additional value. It is still possible that this selector can select less values than minNumber if there are less than minNumber values supplied to it for selection, in which case all supplied values are selected.
+
+If tolerance is provided (exclusively with minNumber), this function returns a selector of integer variable or value assignments that selects all domain values whose evaluations are in the range [min, min + tolerance], where min is is the minimum valuation by the evaluator over the domain values to be evaluated. The parameter tolerance must be non-negative.
+
+Parameters:	
+evaluator – Evaluator of integer variable or integer value
+minNumber (Optional) – Minimum number of values that are selected, with the smallest evaluation according to the evaluator e
+tolerance (Optional) – Tolerance of the values to be selected
+Returns:	An expression of type selector of integer value or selector of integer variable
+
+
+---------
+docplex.cp.modeler.sequence(min, max, width, vars, values, cards)[source]
+Constrains the number of occurrences of the values taken by the different subsets of consecutive k variables.
+
+This constraint ensures:
+
+that cards[i] will be equal to the number of occurrences of the value values[i] in the array vars,
+and that each sequence of width consecutive variables (like vars[j+1], vars[j+2], …, vars[j+width]) takes at least min and at most max values of the array values.
+Parameters:	
+min – The minimum number of allowable values (integer)
+max – The maximum number of allowable values (integer)
+width – The size of the sequences of consecutive variables (integer)
+vars – The array of variables (array of integer expresssions)
+values – The array of values (array of integers)
+cards – The array of cardinality variables (array of integer expressions)
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.sgn(x)[source]
+Builds the sign of a float expression.
+
+The sign of the expression is an integer whose value is -1, 0 or +1 if expression x is respectively lower than, equal to, or greater than zero.
+
+Parameters:	x – A float expression.
+Returns:	An integer expression representing sign(x) (-1, 0 or +1)
+
+---------
+docplex.cp.modeler.size_eval(interval, function, absentValue=None)[source]
+Evaluates a segmented function on the size of an interval variable.
+
+Evaluate function for the x value equal to the size of interval variable interval. If interval is absent then it does not have any defined size and absentValue is returned.
+
+Parameters:	
+interval – Interval variable.
+function – Function to evaluate.
+absentValue (Optional) – Value to return if interval variable interval is absent. If not given, absent value is zero.
+Returns:	A float expression
+
+
+---------
+docplex.cp.modeler.size_of(interval, absentValue=None)[source]
+Returns the size of a specified interval variable.
+
+This function returns an integer expression that is equal to size of the interval variable interval if it is present. If it is absent then the value of the expression is absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent. Zero if not given.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.size_of_next(sequence, interval, lastValue=None, absentValue=None)[source]
+Returns an integer expression that represents the size of the interval variable that is next.
+
+This function returns an integer expression that represents the size of the interval variable that is next to interval in sequence variable sequence. When interval is present and is the last interval of sequence, it returns the constant integer value lastValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+lastValue – Value to return if interval variable interval is the last one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.size_of_prev(sequence, interval, firstValue=None, absentValue=None)[source]
+Returns an integer expression that represents the size of the interval variable that is previous.
+
+This function returns an integer expression that represents the size of the interval variable that is previous to interval in sequence variable sequence. When interval is present and is the first interval of sequence, it returns the constant integer value firstValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+firstValue – Value to return if interval variable interval is the first one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.slope_piecewise_linear(x, points, slopes, refX, refY)[source]
+Evaluates piecewise-linear function given by set of breaking points and slopes.
+
+This function evaluates piecewise-linear function at a point x. The function consists of several segments separated by points, within each segment the function is linear. The function is defined by slopes of all segments (slopes) and by breaking points (points) on x-axis. Furthermore it is necessary to specify reference value refX and corresponding function value refY.
+
+The function is continuous unless some value in points is specified twice. Specifying the same value in points allows to model discontinuous function, in this case the corresponding value in slopes is not interpreted as a slope but as the height of the jump (delta) at that point.
+
+Assuming that the array points has size n, the function consists of the following linear segments:
+
+the segment 0 is defined on interval (-infinity, *points*[0]) and has a *slope*[0].
+the segment i, i in 1, 2, .., n-1, is defined on the interval [*points*[i-1], *points*[i]) with a slope *slope*[i].
+the segment n is defined on the interval [*points*[n-1], infinity) with a slope *slope*[n].
+Parameters:	
+x – x-value for which the function should be evaluated.
+points – sorted array of n-1 x-values (breaking points) that separate n function segments.
+slopes – array of n slopes, one for each segments.
+refX – reference x-value.
+refY – value of the function at refX(reference y-value).
+Returns:	Value of the function at point x.
+
+
+---------
+docplex.cp.modeler.span(interval, array)[source]
+Creates a span constraint between interval variables.
+
+This function creates a span constraint between an interval variable interval and a set of interval variables in array. This constraint states that interval when it is present spans over all present intervals from the array. That is: interval starts together with the first present interval from array and ends together with the last one. Interval interval is absent if and only if all intervals in array are absent.
+
+Parameters:	
+interval – Spanning interval variable.
+array – Array of spanned interval variables.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.square(x)[source]
+Returns the square of a numeric expression.
+
+Function square computes the square of x. Depending on the type of x the result is an integer or a floating-point expression.
+
+Parameters:	x – Integer or float expression.
+Returns:	An expression representing (x * x). Type is the same than parameter (integer expression or float expression).
+
+---------
+docplex.cp.modeler.standard_deviation(x, meanLB=-inf, meanUB=inf)[source]
+Creates a constrained numeric expression equal to the standard deviation of the values of the variables in an array.
+
+This function creates a new constrained numeric expression which is equal to the standard deviation of the values of the variables in the array x.
+
+The mean of the values of the variables in the array x is constrained to be in the interval [meanLB, meanUB].
+
+Parameters:	
+x – An array of integer expressions.
+meanLB (Optional) – A float value for lower bound on the mean of the array, -infinity if not given.
+meanUB (Optional) – A float value upper bound on the mean of the array, infinity if not given.
+Returns:	A float expression
+
+
+---------
+docplex.cp.modeler.start_at_end(a, b, delay=None)[source]
+Constrains the delay between the start of one interval variable and end of another one.
+
+The function start_at_end constrains interval variables a and b in the following way. If both intervals a and b are present then interval b must end exactly at start_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. Note that delay can be negative.
+
+Parameters:	
+a – First interval variables.
+b – Second interval variables.
+delay – Exact delay between start of a and end of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.start_at_start(a, b, delay=None)[source]
+Constrains the delay between the starts of two interval variables.
+
+The function start_at_start constrains interval variables a and b in the following way. If both intervals a and b are present, then interval b must start exactly at start_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. Note that delay can be negative.
+
+Parameters:	
+a – First interval variables.
+b – Second interval variables.
+delay – Exact delay between starts of a and b. If not specified then zero is used.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.start_before_end(a, b, delay=None)[source]
+Constrains minimum delay between the start of one interval variable and end of another one.
+
+The function start_before_end constrains interval variables a and b in the following way. If both interval variables a and b are present, then b cannot end before start_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. It is possible to specify a negative delay; in this case b can actually end before the start of a but still not sooner than start_of(a) + delay.
+
+Parameters:	
+a – Interval variable which starts before.
+b – Interval variable which ends after.
+delay – The minimal delay between start of a and end of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.start_before_start(a, b, delay=None)[source]
+Constrains the minimum delay between starts of two interval variables.
+
+The function start_before_start constrains interval variables a and b in the following way. If both interval variables a and b are present, then b cannot start before start_of(a) + delay. If a or b is absent then the constraint is automatically satisfied.
+
+The default value for delay is zero. It is possible to specify even negative delay, in this case b can actually start before the start of a but still not sooner than start_of(a) + delay.
+
+Parameters:	
+a – Interval variable which starts before.
+b – Interval variable which starts after.
+delay – The minimal delay between start of a and start of b. If not specified then zero is used.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.start_eval(interval, function, absentValue=None)[source]
+Evaluates a segmented function at the start of an interval variable.
+
+Evaluates function at the start of interval variable interval. If interval is absent, it does not have any defined start and absentValue is returned.
+
+Parameters:	
+interval – Interval variable.
+function – Function to evaluate.
+absentValue (Optional) – Value to return if interval variable interval is absent. If not given, absent value is zero.
+Returns:	A float expression
+
+
+---------
+docplex.cp.modeler.start_of(interval, absentValue=None)[source]
+Returns the start of a specified interval variable.
+
+This function returns an integer expression that is equal to start of the interval variable interval if it is present. If it is absent, then the value of the expression is absentValue (zero by default).
+
+Parameters:	
+interval – Interval variable.
+absentValue (Optional) – Value to return if the interval variable interval becomes absent. Zero if not given.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.start_of_next(sequence, interval, lastValue=None, absentValue=None)[source]
+Returns an integer expression that represents the start of the interval variable that is next.
+
+This function returns an integer expression that represents the start of the interval variable that is next to interval in sequence variable sequence. When interval is present and is the last interval of sequence, it returns the constant integer value lastValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+lastValue – (Optional) Value to return if interval variable interval is the last one in sequence.
+absentValue (Optional) – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.start_of_prev(sequence, interval, firstValue=None, absentValue=None)[source]
+Returns an integer expression that represents the start of the interval variable that is previous.
+
+This function returns an integer expression that represents the start of the interval variable that is previous to interval in sequence variable sequence. When interval is present and is the first interval of sequence, it returns the constant integer value firstValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+firstValue – (Optional) Value to return if interval variable interval is the first one in sequence.
+absentValue (Optional) – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.step_at(t, h)[source]
+Returns an elementary cumul function of constant value after a given point.
+
+This function returns an elementary cumul function expression that is equal to 0 before point t and equal to h after point t.
+
+Parameters:	
+t – Integer.
+h – Non-negative integer representing the height of the contribution after point t.
+Possible argument and return type combinations are:
+
+(integer time, positive integer) => cumul atom
+Returns:	A cumul atom expression
+
+---------
+docplex.cp.modeler.step_at_end(interval, height)[source]
+Returns an elementary cumul function of constant value after the end of an interval.
+
+This function returns an elementary cumul function expression that, whenever interval variable interval is present, is equal to 0 before the start of interval and equal to height after the end of interval.
+
+If height is a range specified as a tuple of integers, it means that the height value of the function is part of the decisions of the problem and will be fixed by the engine within this specified range.
+
+When interval variable interval is absent, the function is the constant zero function.
+
+Parameters:	
+interval – Interval variable contributing to the cumul function.
+height – Non-negative integer representing the height of the contribution, or tuple of 2 non-negative integers representing the range of possible values for the height of the contribution.
+Returns:	A cumul atom expression
+
+
+---------
+docplex.cp.modeler.step_at_start(interval, height)[source]
+Returns an elementary cumul function of constant value after the start of an interval.
+
+This function returns an elementary cumul function expression that, whenever interval variable interval is present, is equal to 0 before the start of interval and equal to height after the start of interval.
+
+If height is a range specified as a tuple of integers, it means that the height value of the function is part of the decisions of the problem and will be fixed by the engine within this specified range.
+
+When interval variable interval is absent, the function is the constant zero function.
+
+Parameters:	
+interval – Interval variable contributing to the cumul function.
+height – Non-negative integer representing the height of the contribution, or tuple of 2 non-negative integers representing the range of possible values for the height of the contribution.
+Returns:	A cumul atom expression
+
+
+---------
+docplex.cp.modeler.strict_lexicographic(x, y)[source]
+Returns a constraint which maintains two arrays to be strictly lexicographically ordered.
+
+The strict_lexicographic function returns a constraint which maintains two arrays to be strictly lexicographically ordered.
+
+More specifically, strict_lexicographic(x, y) maintains that x is strictly less than y in the lexicographical sense of the term. This means that there exists i < size(x) such that for all j < i, x[j] = y[j] and x[i] < y[i].
+
+Note that the size of the two arrays must be the same.
+
+This function is supported only by CPO solver whose version is greater than 12.10.
+
+Parameters:	
+x – An array of integer expressions.
+y – An array of integer expressions.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.strong(x)[source]
+A model annotation to encourage CP Optimizer to produce stronger (higher inference) constraints.
+
+The strong constraint strengthens the model on the expressions x. This is done by creating an allowed_assignments constraint in place of the strong constraint during presolve. Only the assignments to the expressions which do not result in an immediate inconsistency are added to the tuple set of the allowed_assignments constraint.
+
+Constraints that can be identified as redundant (when taken together with this new constraint) are removed from the model during presolve. This is the case for constraints that are only over the variables of the array given as argument.
+
+Parameters:	x – An array of integer expressions over which propagation is to be strengthened.
+Returns:	Constraint expression
+
+---------
+docplex.cp.modeler.sub_circuit(next, *args)[source]
+Creates and returns a circuit-imposing constraint in a model.
+
+Given an array of n successor variables next, this constraint imposes the next variables to all have values in [0, n-1] and also imposes that all of their values are different. We can understand next[i]=j as meaning that node j is immediately after node i. Additionally, this constraint ensures that at most one circuit (a path which forms a loop) of length at least two can exist (called the “main” circuit) and all nodes not involved in this circuit have next[i] = i. We can see that if next[i] = j, where i and j are different values, then nodes i and j are both on the main circuit. Any node i where next[i] = i is not on the main circuit, so to ensure that a particular node i appears on the main circuit, one can impose a constraint next[i] != i.
+
+Note: By symmetry, one may also consider the next parameter to represent the predecessor nodes rather than successor nodes. The inverse(IntExpr[], IntExpr[]) constraint can be used to maintain an array of predecessor variables pred via cp.inverse(next, pred).
+
+Note: This constraint cannot be used in a logical constraint.
+
+Parameters:	
+next – Array (list, tuple or iterable) of expressions, or first element of the list
+*args – Other expressions if first argument is a single expression
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.sum(arr, *args)[source]
+Returns the sum of all expressions in an array of expressions.
+
+The function sum computes the sum of all expressions in array x. If all elements of x are integer expressions, result is an integer expression. If at least one element of x is a floating-point expression, result is a floating-point expression.
+
+Implementation of this method is proof to import all functions of this module at root level. It recalls the builtin sum() function if no model expression is found in the parameters.
+
+Parameters:	arr – An array of integer or floating-point expressions.
+Returns:	An integer or float expression depending on the type of argument.
+
+---------
+docplex.cp.modeler.sum_of(x)[source]
+Returns the sum of all expressions in an array of expressions.
+
+The function sum_of computes the sum of x. Depending on the type of x the result is an integer, floating-point or cumul expression.
+
+Parameters:	x – An array of integer, floating-point or cumul expressions.
+Returns:	An integer, float or cumul expression depending on the type of argument.
+
+---------
+docplex.cp.modeler.synchronize(interval, array)[source]
+Creates a synchronization constraint between interval variables.
+
+This function creates a synchronization constraint between an interval variable interval and a set of interval variables in array. This constraint makes all present intervals in array start and end together with interval, if it is present.
+
+Parameters:	
+interval – Interval variable.
+array – Array of interval variables synchronized with interval.
+Returns:	Constraint expression
+
+
+---------
+docplex.cp.modeler.times(e1, e2)[source]
+Creates an expression that represents the product of two expressions.
+
+Parameters:	
+e1 – First expression that can be integer or float expression
+e2 – Second expression that can be integer or float expression
+Returns:	An expression representing (e1 * e2). The expression is integer expression or float expression depending on the type of the arguments.
+
+
+---------
+docplex.cp.modeler.true()[source]
+Returns a true boolean expression.
+
+The function true() does not have any particular purpose except for being a filler.
+
+CP Optimizer usually eliminates true() from expressions using partial evaluation.
+
+Returns:	A boolean true expression
+
+---------
+docplex.cp.modeler.trunc(x)[source]
+Builds the truncated integer parts of a float expression.
+
+Using this modeling expression implicitly constrain the float expression argument to be inside the integer value bounds [INT_MIN, INT_MAX].
+
+Parameters:	x – A float expression.
+Returns:	An integer expression representing trunc(x)
+
+---------
+docplex.cp.modeler.type_of_next(sequence, interval, lastValue=None, absentValue=None)[source]
+Returns an integer expression that represents the type of the interval variable that is next.
+
+This function returns an integer expression that represents the type of the interval variable that is next to interval in sequence variable sequence. When interval is present and is the last interval of sequence, it returns the constant integer value lastValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+lastValue – Value to return if interval variable interval is the last one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.type_of_prev(sequence, interval, firstValue=None, absentValue=None)[source]
+Returns an integer expression that represents the type of the interval variable that is previous.
+
+This function returns an integer expression that represents the type of the interval variable that is previous to interval in sequence variable sequence. When interval is present and is the first interval of sequence, it returns the constant integer value firstValue (zero by default). When interval is absent, it returns the constant integer value absentValue (zero by default).
+
+Parameters:	
+sequence – Sequence variable.
+interval – Interval variable.
+firstValue – Value to return if interval variable interval is the first one in sequence.
+absentValue – Value to return if interval variable interval becomes absent.
+Returns:	An integer expression
+
+
+---------
+docplex.cp.modeler.value()[source]
+Value evaluator that returns as evaluation the value itself.
+
+This is useful to define instantiation strategies that choose the smallest or the largest value in a domain.
+
+Returns:	An evaluator of integer value
+
+---------
+docplex.cp.modeler.value_impact()[source]
+Value evaluator that represents the average reduction of the search space observed so far when instantiating the selected variable to the evaluated value.
+
+The greater the evaluation, the more space reduction this instantiation achieves. In general it is a good strategy to prefer a value having the smallest impact.
+
+Returns:	An evaluator of integer value
+
+---------
+docplex.cp.modeler.value_index(vals, defaultValue=None)[source]
+Value evaluator that represents the index of the value in an array of integer values.
+
+The evaluation of vals[i] is i. If the value does not appear in the array, defautEval is the evaluation returned.
+
+Parameters:	
+vals – Array of integer values
+defaultValue (Optional) – Default value that is returned if value is not in the array. By default, this value is -1.
+Returns:	An evaluator of integer value
+
+
+---------
+docplex.cp.modeler.value_success_rate()[source]
+Value evaluator that represents the success rate of instantiating the selected variable to the evaluated value.
+
+Assuming the selected variable has been instantiated to the evaluated value n times so far and this has resulted in f failures, the success rate is (n-f)/n.
+
+Returns:	An evaluator of integer value
+
+---------
+docplex.cp.modeler.var_impact()[source]
+Variable evaluator that represents the average reduction of the search space observed so far for this variable.
+
+The greater the evaluation, the more space reduction this variable achieves. In general, it is a good strategy to start with variable having the greatest impact in order to reduce the search space size.
+
+Returns:	An evaluator of integer variable
+
+---------
+docplex.cp.modeler.var_index(vars, defaultIndex=None)[source]
+Variable evaluator that represents the index of the variable in an array of variables.
+
+The evaluation of vars[i] is i. If the variable does not appear in the array, defaultIndex is the evaluation returned.
+
+Parameters:	
+vars – Array of integer variables.
+defaultIndex (Optional) – Default index that is returned if the variable does not appear in the array. If not given, -1 is used.
+Returns:	An evaluator of integer variable
+
+
+---------
+docplex.cp.modeler.var_local_impact(effort=None)[source]
+Variable evaluator that represents the impact of the variable computed at the current node of the search tree.
+
+This computation is made by probing on values from the domain of the variables. The parameter effort indicates how much effort should be spent to compute this impact. When effort is equal to -1, every value of the domain is probed, otherwise the number of probes effort will increase as the effort value increases.
+
+Parameters:	effort (Optional) – Integer representing how much effort should be spent to compute this impact. By default, -1 is used.
+Returns:	An evaluator of integer variable
+
+---------
+docplex.cp.modeler.var_success_rate()[source]
+Variable evaluator that represents the success rate of the variable.
+
+Assuming the evaluated variable has been instantiated n times so far and this has resulted in f failures, the success rate is (n-f)/n.
+
+Returns:	An evaluator of integer variable
