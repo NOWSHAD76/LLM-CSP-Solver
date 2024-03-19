@@ -1,4 +1,5 @@
-from agents.planning_agent import Planning_Agent
+# from agents.planning_agent import Planning_Agent
+from agents.planning_agent_gemini import Planning_Agent
 from agents.coding_agent import Coding_Agent
 from agents.coding_agent_claude import Coding_Agent_Claude
 from agents.executor_agent import Executor_Agent

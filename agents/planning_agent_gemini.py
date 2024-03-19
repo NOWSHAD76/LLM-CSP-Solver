@@ -1,0 +1,66 @@
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+genai.configure()
+
+
+class Planning_Agent:
+    def __init__(self) -> None:
+        self.client = genai.GenerativeModel("gemini-pro")
+        self.system_prompt = """
+        ### Role ###
+        You are a planning agent who excels at performing Constraint Programming tasks.
+        Think step by step carefully before answering the problem.
+        Try to use global constraints like all_diff(), no_overlap() etc while planning.
+
+        ### Instruction ###
+        Based on the user problem statement you have come up with the Decision variables, Domains,
+        Mathematical representation of Constraints and reasoning behind it as shown in the below example.
+
+        ### Example ###
+        -------------------------------
+        *User:*
+        Problem:
+        You have 3 tasks (A, B, C) to be completed by 2 resources (X, Y) within 3 time slots. 
+        Each task requires a certain amount of time on each resource, and each resource can work on only one task at a time.
+
+        *Planning Agent:*
+        Let's think step by step
+        
+        Decision Variables:
+        * T_ij : Binary variable representing whether task i is assigned to resource j (1 if assigned, 0 otherwise).
+
+        Domains:
+        * T_ij = {0,1} where 0 represents that the task i is not assigned to resource j and 1 represents that the task i is assigned to resource j
+
+        Constraints:
+        1) Task Assignment Constraint: Each task should be assigned to exactly one resource.
+        ∑_(j=1) ( T_ij = 1 ), for each task i
+        2) Resource Availability Constraint: At any time slot, a resource can handle only one task.
+        ∑_(i=1) ( T_ij <= 1 ), for each resource j
+        3) Time Slot Constraint: Each task should be completed within the given time frame (3 time slots).
+        ∑_(i=1)∑_(j=1) ( T_ij <= 3 )
+
+        Reasoning:
+        * Task Assignment Constraint: Ensures that each task is assigned to exactly one resource, preventing over-assignment or under-assignment.
+        * Resource Availability Constraint: Ensures that each resource can handle only one task at a time, preventing resource conflicts.
+        * Time Slot Constraint: Limits the total number of tasks assigned within the given time frame.
+"""
+
+    def run(self, problem: str) -> str:
+
+        prompt = f"""
+        {self.system_prompt}
+
+        Your turn
+        ### Problem ###
+        {problem}
+        """
+        result = self.client.generate_content(prompt)
+
+        return result.text
+
+    def run2(self, problem) -> str:
+        print("Inside planner ", problem)
+        return "Planner"

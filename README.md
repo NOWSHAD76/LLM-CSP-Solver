@@ -6,6 +6,7 @@ Using LLM to solve CSP
     ```
     OPENAI_API_KEY=XXXX
     ANTHROPIC_API_KEY=XXXX
+    GOOGLE_API_KEY=XXX
     ```
 2. Create a conda or virtual environment if required and run below commands. Do not add -w at the end as it refreshes the page whenever a new code is generated
     ```
