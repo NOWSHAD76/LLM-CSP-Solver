@@ -99,6 +99,9 @@ class Coding_Agent_Claude:
         """
 
     def run(self, instruction: str) -> str:
+        """
+        Generate the docplex code based on the planning agents response
+        """
         prompt = f"""
         {self.system_prompt}
 
@@ -117,6 +120,9 @@ class Coding_Agent_Claude:
         return result.content[0].text
 
     def fix_code(self, code: str, error: str, data: str, docs: str) -> str:
+        """
+        Fixing the code based on the error, data and documentation reference
+        """
         prompt = f"""
         ### Code ###
         {code}

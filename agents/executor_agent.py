@@ -8,16 +8,7 @@ import pathlib
 import subprocess
 import pickle
 
-# import json
-# import io, sys
-# from io import StringIO
-
-
-# import contextlib
-
 load_dotenv()  # take environment variables from .env.
-# CODE_BLOCK_PATTERN = r"```[ \t]*(\w+)?[ \t]*\r?\n(.*?)\r?\n[ \t]*```"
-CODE_BLOCK_PATTERN = r"^```(?:\w+)?\s*\n(.*?)(?=^```)```"
 WORKING_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "extensions")
 WIN32 = sys.platform == "win32"
 PATH_SEPARATOR = WIN32 and "\\" or "/"
@@ -103,6 +94,9 @@ class Executor_Agent:
         """
 
     def input_format(self, code: str) -> str:
+        """
+        Analyze the code and prompt the user to give input data in a specific format.
+        """
         system_msg = {"role": "system", "content": self.system_prompt}
         usr_msg = {"role": "user", "content": code}
         self.history.append(system_msg)
@@ -118,88 +112,49 @@ class Executor_Agent:
         self.history.append(message_answer)
         return result.choices[0].message.content
 
-    def get_run_command(self) -> str:
-        fun_def_prompt = """
-        Give me the python code for executing the function.
-        Note that you should return anything else apart from the command.
-        Refer below example
+    # def get_run_command(self) -> str:
+    #     fun_def_prompt = """
+    #     Give me the python code for executing the function.
+    #     Note that you should return anything else apart from the command.
+    #     Refer below example
 
-        ### Example ###
-        ---------------------
-        Code:
-        ```
-        def execute(input_a,input_b):
-            result = input_a * input_b
-            return result
-        ```
+    #     ### Example ###
+    #     ---------------------
+    #     Code:
+    #     ```
+    #     def execute(input_a,input_b):
+    #         result = input_a * input_b
+    #         return result
+    #     ```
 
-        Assistant:
-        ```
-        execute(input_a,input_b)
-        ```
-        """
-        usr_msg = {"role": "user", "content": fun_def_prompt}
-        self.history.append(usr_msg)
-        result = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=self.history,
-        )
-        message_answer = {
-            "role": "assistant",
-            "content": result.choices[0].message.content,
-        }
-        self.history.append(message_answer)
-        return result.choices[0].message.content
-
-    # def execute_code(self, code: str, input_data: str, run_command: str):
-    #     code_pattern = re.compile(CODE_BLOCK_PATTERN + r"|`([^`]+)`")
-    #     code_blocks = code_pattern.findall(code.replace("python", ""))
-    #     input_dict = json.loads(input_data.replace("'", ""))
-    #     run_command = code_pattern.findall(run_command.replace("python", ""))
-
-    #     # Extract the individual code blocks and languages from the matched groups
-    #     extracted_code = []
-    #     for lang, group1, group2 in code_blocks:
-    #         if group1:
-    #             extracted_code.append((lang.strip(), group1.strip()))
-    #         elif group2:
-    #             extracted_code.append(("", group2.strip()))
-    #     print(extracted_code)
-    #     extracted_run = []
-    #     for lang, group1, group2 in run_command:
-    #         if group1:
-    #             extracted_run.append((lang.strip(), group1.strip()))
-    #         elif group2:
-    #             extracted_run.append(("", group2.strip()))
-    #     print(extracted_run)
-    #     print("All good ", input_dict)
-
-    #     old_stdout = sys.stdout
-    #     new_stdout = io.StringIO()
-    #     sys.stdout = new_stdout
-    #     try:
-    #         exec(extracted_code[-1][-1])
-    #         exec(extracted_run[-1][-1])
-    #     except Exception as e:
-    #         print("There is a error in the code: ", e)
-    #     result = sys.stdout.getvalue().strip()
-    #     sys.stdout = old_stdout
-    #     print("Final results ", result)
-    #     return result
+    #     Assistant:
+    #     ```
+    #     execute(input_a,input_b)
+    #     ```
+    #     """
+    #     usr_msg = {"role": "user", "content": fun_def_prompt}
+    #     self.history.append(usr_msg)
+    #     result = self.client.chat.completions.create(
+    #         model="gpt-3.5-turbo",
+    #         messages=self.history,
+    #     )
+    #     message_answer = {
+    #         "role": "assistant",
+    #         "content": result.choices[0].message.content,
+    #     }
+    #     self.history.append(message_answer)
+    #     return result.choices[0].message.content
 
     def execute_code(self, code: str, input_data_path: str, file_name=None):
-        # code_pattern = re.compile(CODE_BLOCK_PATTERN + r"|`([^`]+)`")
-        # code_pattern = re.compile(CODE_BLOCK_PATTERN)
+        """
+        Extract the code from the LLM response and execute it for the input provided
+        by the user.
+        """
         code_pattern = re.compile(r"```([^`]+)```")
         code_blocks = code_pattern.findall(code.replace("python", ""))
         print("Code blocks ", code_blocks)
         # Extract the individual code blocks and languages from the matched groups
         extracted_code = []
-        # for lang, group1, group2 in code_blocks:
-        #     if group1:
-        #         extracted_code.append((lang.strip(), group1.strip()))
-        #     elif group2:
-        #         extracted_code.append(("", group2.strip()))
         extracted_code = code_blocks[-1]
         print(extracted_code)
         if file_name is None:
@@ -211,7 +166,6 @@ class Executor_Agent:
         file_dir = os.path.dirname(file_path)
         os.makedirs(file_dir, exist_ok=True)
         with open(file_path, "w", encoding="utf-8") as fout:
-            # fout.write(extracted_code[-1][-1])
             fout.write(extracted_code)
         cmd = [
             sys.executable,
@@ -242,16 +196,20 @@ class Executor_Agent:
                 logs = logs.replace(str(abs_path), "")
         else:
             logs = result.stdout
-        # print("Result code====> ", result.returncode)
-        # print("Logs===>", logs)
         return result.returncode, logs
 
     def read_data(self, file_path: str) -> str:
+        """
+        Reads the user data and returns as a string for coding agent's reference
+        """
         with open(file_path, "rb") as f:
             data = pickle.load(f)
         return str(data)
 
     def logs_analyzer(self, logs: str):
+        """
+        Analyze the logs and provide the specific error for querying the documentation
+        """
         prompt = f"""
         Analyze the below error logs and give me the exact error like AttributeError, TypeError etc
         excluding the line number, file name etc as shown in the below example

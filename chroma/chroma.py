@@ -29,23 +29,21 @@ def create_chroma_collection(documents: List[str], name: str) -> Collection:
     return db
 
 
-def get_relevant_doc(db: Collection, question: str, top_k: int = 10):
+def get_relevant_doc(db: Collection, error: str, top_k: int = 10):
     """
     Get relevant Questions and Answers
 
     Parameters:
     -----------
     db: Chroma collection client
-    question: Question to which relevant questions needs to be searched for
-    sample_question_ids: List of ids of sample questions
-    name: Name of the collection
-    top_k: No of similar questions that needs to be returned by chroma
+    error: Error given by the executor agent
+    top_k: No of relavant documents that needs to be returned by chroma
 
     Returns:
     -----------
-    List of relevant questions, answers and ratings
+    List of relevant documents
     """
-    results = db.query(query_texts=[question], n_results=top_k)
+    results = db.query(query_texts=[error], n_results=top_k)
     docs = ""
     for doc in results["documents"]:
         for d in doc:
@@ -94,6 +92,4 @@ if __name__ == "__main__":
     for doc in results["documents"]:
         for d in doc:
             docs = docs + "\n" + d
-    # docs = "\n".join([doc for doc in results["documents"]])
     print(docs)
-    # print(results)

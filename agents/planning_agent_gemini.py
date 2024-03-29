@@ -49,6 +49,9 @@ class Planning_Agent:
 """
 
     def run(self, problem: str) -> str:
+        """
+        Converting the user given natural language problem to a CSP formulation.
+        """
 
         prompt = f"""
         {self.system_prompt}
@@ -60,7 +63,3 @@ class Planning_Agent:
         result = self.client.generate_content(prompt)
 
         return result.text
-
-    def run2(self, problem) -> str:
-        print("Inside planner ", problem)
-        return "Planner"
