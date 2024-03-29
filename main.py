@@ -19,7 +19,9 @@ coding_agent = Coding_Agent_Claude()
 
 async def planner(problem: str) -> str:
     planning_agent = Planning_Agent()
-    res = planning_agent.run(problem=problem)
+    collection = get_chroma_collection("planning_agent_examples")
+    relevant_example = get_relevant_doc(collection, problem, 1)
+    res = planning_agent.run(problem=problem, example=relevant_example)
     return res
 
 
@@ -29,7 +31,9 @@ async def coder(problem: str, instructions: str) -> str:
     {problem}\n
     {instructions}
     """
-    code = coding_agent.run(coding_agent_prompt)
+    collection = get_chroma_collection("coding_agent_examples")
+    relevant_example = get_relevant_doc(collection, instructions, 1)
+    code = coding_agent.run(coding_agent_prompt, relevant_example)
     return code
 
 

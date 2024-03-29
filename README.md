@@ -11,5 +11,6 @@ Using LLM to solve CSP
 2. Create a conda or virtual environment if required and run below commands. Do not add -w at the end as it refreshes the page whenever a new code is generated
     ```
     pip install -r requirements.txt
+    python chroma/chroma.py # To create chroma collections
     chainlit run main.py
     ```

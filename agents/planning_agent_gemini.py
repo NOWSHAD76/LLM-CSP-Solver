@@ -20,41 +20,16 @@ class Planning_Agent:
 
         ### Example ###
         -------------------------------
-        *User:*
-        Problem:
-        You have 3 tasks (A, B, C) to be completed by 2 resources (X, Y) within 3 time slots. 
-        Each task requires a certain amount of time on each resource, and each resource can work on only one task at a time.
-
-        *Planning Agent:*
-        Let's think step by step
-        
-        Decision Variables:
-        * T_ij : Binary variable representing whether task i is assigned to resource j (1 if assigned, 0 otherwise).
-
-        Domains:
-        * T_ij = {0,1} where 0 represents that the task i is not assigned to resource j and 1 represents that the task i is assigned to resource j
-
-        Constraints:
-        1) Task Assignment Constraint: Each task should be assigned to exactly one resource.
-        ∑_(j=1) ( T_ij = 1 ), for each task i
-        2) Resource Availability Constraint: At any time slot, a resource can handle only one task.
-        ∑_(i=1) ( T_ij <= 1 ), for each resource j
-        3) Time Slot Constraint: Each task should be completed within the given time frame (3 time slots).
-        ∑_(i=1)∑_(j=1) ( T_ij <= 3 )
-
-        Reasoning:
-        * Task Assignment Constraint: Ensures that each task is assigned to exactly one resource, preventing over-assignment or under-assignment.
-        * Resource Availability Constraint: Ensures that each resource can handle only one task at a time, preventing resource conflicts.
-        * Time Slot Constraint: Limits the total number of tasks assigned within the given time frame.
 """
 
-    def run(self, problem: str) -> str:
+    def run(self, problem: str, example: str) -> str:
         """
         Converting the user given natural language problem to a CSP formulation.
         """
 
         prompt = f"""
         {self.system_prompt}
+        {example}
 
         Your turn
         ### Problem ###

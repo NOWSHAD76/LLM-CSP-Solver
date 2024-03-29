@@ -112,39 +112,6 @@ class Executor_Agent:
         self.history.append(message_answer)
         return result.choices[0].message.content
 
-    # def get_run_command(self) -> str:
-    #     fun_def_prompt = """
-    #     Give me the python code for executing the function.
-    #     Note that you should return anything else apart from the command.
-    #     Refer below example
-
-    #     ### Example ###
-    #     ---------------------
-    #     Code:
-    #     ```
-    #     def execute(input_a,input_b):
-    #         result = input_a * input_b
-    #         return result
-    #     ```
-
-    #     Assistant:
-    #     ```
-    #     execute(input_a,input_b)
-    #     ```
-    #     """
-    #     usr_msg = {"role": "user", "content": fun_def_prompt}
-    #     self.history.append(usr_msg)
-    #     result = self.client.chat.completions.create(
-    #         model="gpt-3.5-turbo",
-    #         messages=self.history,
-    #     )
-    #     message_answer = {
-    #         "role": "assistant",
-    #         "content": result.choices[0].message.content,
-    #     }
-    #     self.history.append(message_answer)
-    #     return result.choices[0].message.content
-
     def execute_code(self, code: str, input_data_path: str, file_name=None):
         """
         Extract the code from the LLM response and execute it for the input provided

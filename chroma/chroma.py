@@ -75,21 +75,41 @@ def get_chroma_collection(name: str) -> Collection:
 
 
 if __name__ == "__main__":
-    # file_name = "D:\SMU_Classes\Jan 2024 Term Latest\AI Planning\Grp Project\LLM-CSP-Solver\chroma\data\documentation.txt"
+    ## Creating Library documentation lookup
     file_name = "chroma\data\documentation.txt"
     with open(file_name, encoding="utf8", mode="r") as f:
         data = f.read()  # .strip()
     chunks = data.split("---------")
     print("All chunks ", len(chunks))
-    # print(chunks[:3])
     collection_name = "docplex_documentation"
-    # db = create_chroma_collection(chunks, collection_name)
+    db = create_chroma_collection(chunks, collection_name)
     db = get_chroma_collection(collection_name)
     # question = "AttributeError: 'CpoModel' object has no attribute 'all_different'"
     question = "AttributeError: 'CpoModel' object has no attribute 'all_distinct'\n"
     results = get_relevant_doc(db, question, 3)
-    docs = ""
-    for doc in results["documents"]:
-        for d in doc:
-            docs = docs + "\n" + d
-    print(docs)
+    print(results)
+    ## Creating planning_agent example collection
+    file_name = "chroma\data\planning_agent_examples.txt"
+    with open(file_name, encoding="utf8", mode="r") as f:
+        data = f.read()  # .strip()
+    chunks = data.split("---------")
+    print("All chunks ", len(chunks))
+    collection_name = "planning_agent_examples"
+    db = create_chroma_collection(chunks, collection_name)
+    db = get_chroma_collection(collection_name)
+    question = "Scheduling problem example"
+    results = get_relevant_doc(db, question, 3)
+    print(results)
+    ## Creating planning_agent example collection
+    file_name = "chroma\data\coding_agent_examples.txt"
+    with open(file_name, encoding="utf8", mode="r") as f:
+        data = f.read()  # .strip()
+    chunks = data.split("---------")
+    print("All chunks ", len(chunks))
+    # print(chunks[:3])
+    collection_name = "coding_agent_examples"
+    db = create_chroma_collection(chunks, collection_name)
+    db = get_chroma_collection(collection_name)
+    question = "Scheduling problem example"
+    results = get_relevant_doc(db, question, 3)
+    print(results)
