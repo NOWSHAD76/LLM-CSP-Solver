@@ -9,7 +9,7 @@ The primary objective of this project is to develop an industry-agnostic solutio
 
 ### System Architecture
 
-
+![System Architecture](https://github.com/NOWSHAD76/LLM-CSP-Solver/assets/37472101/2f2d4b97-9620-4648-a74a-094c86769782)
 
 ### How to run
 1. Create a .env file in the root directory with your OPENAI_API_KEY like shown below
